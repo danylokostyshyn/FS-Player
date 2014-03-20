@@ -26,6 +26,8 @@
 		7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */; };
 		7FCACF5F18D8F0B6009F439A /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */; };
 		7FCACF6118D8F0C1009F439A /* FSSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF6018D8F0C1009F439A /* FSSearchViewController.xib */; };
+		7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6818D9C113009F439A /* FSCatalog.m */; };
+		7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6B18DAE4A4009F439A /* FSSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,10 @@
 		7FCACF5D18D8F0B6009F439A /* FSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAppDelegate.h; path = Models/FSAppDelegate.h; sourceTree = "<group>"; };
 		7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAppDelegate.m; path = Models/FSAppDelegate.m; sourceTree = "<group>"; };
 		7FCACF6018D8F0C1009F439A /* FSSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSSearchViewController.xib; path = Resources/NIBs/FSSearchViewController.xib; sourceTree = SOURCE_ROOT; };
+		7FCACF6718D9C113009F439A /* FSCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCatalog.h; path = Models/FSCatalog.h; sourceTree = "<group>"; };
+		7FCACF6818D9C113009F439A /* FSCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCatalog.m; path = Models/FSCatalog.m; sourceTree = "<group>"; };
+		7FCACF6A18DAE4A4009F439A /* FSSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSettings.h; path = Models/FSSettings.h; sourceTree = "<group>"; };
+		7FCACF6B18DAE4A4009F439A /* FSSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSettings.m; path = Models/FSSettings.m; sourceTree = "<group>"; };
 		AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fs-player.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,7 +148,11 @@
 				7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */,
 				7FCACF3618D83B29009F439A /* FSDataFetcher.h */,
 				7FCACF3718D83B29009F439A /* FSDataFetcher.m */,
+				7FCACF6A18DAE4A4009F439A /* FSSettings.h */,
+				7FCACF6B18DAE4A4009F439A /* FSSettings.m */,
 				7FCACF5518D87751009F439A /* FSDescriptionProtocol.h */,
+				7FCACF6718D9C113009F439A /* FSCatalog.h */,
+				7FCACF6818D9C113009F439A /* FSCatalog.m */,
 				7FCACF5218D86063009F439A /* FSFolder.h */,
 				7FCACF5318D86063009F439A /* FSFolder.m */,
 				7FCACF4F18D86053009F439A /* FSFile.h */,
@@ -302,12 +312,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */,
 				7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */,
 				7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */,
 				7FCACF1318D839ED009F439A /* main.m in Sources */,
 				7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */,
 				7FCACF5118D86053009F439A /* FSFile.m in Sources */,
 				7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */,
+				7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */,
 				7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */,
 				7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */,
 				7FCACF5418D86063009F439A /* FSFolder.m in Sources */,

@@ -8,8 +8,8 @@
 
 #import "FSFilesViewController.h"
 
+//models
 #import "FSDataFetcher.h"
-
 #import "FSFile.h"
 #import "FSFolder.h"
 
@@ -75,7 +75,6 @@
             controller.title = folder.name;
             controller.files = files;
             [self.navigationController pushViewController:controller animated:YES];
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         } failure:^(NSError *error) {
             
         }];
@@ -84,16 +83,15 @@
         
         if ([file isPlayable]) {
             if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vlc://"]]) {
-                NSURL *vlcURLScheme = [NSURL URLWithString:[[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"]];
-                [[UIApplication sharedApplication] openURL:vlcURLScheme];
+                NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:vlcScheme]];
             } else {
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 // download VLC player from AppStore
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
             }
         }
     }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

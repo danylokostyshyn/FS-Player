@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FSSearchViewController">
             <connections>
                 <outlet property="searchDisplayController" destination="MaM-vd-GTO" id="TXV-bn-UQQ"/>
+                <outlet property="tableView" destination="fZm-t0-yE6" id="zAN-fm-oaM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="jaX-j8-9Cy"/>
             </connections>
         </placeholder>
@@ -14,7 +15,24 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZm-t0-yE6">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="yLy-VO-jU8"/>
+                        <outlet property="delegate" destination="-1" id="WTP-CX-8wA"/>
+                    </connections>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fZm-t0-yE6" secondAttribute="bottom" id="kyU-r2-V3W"/>
+                <constraint firstItem="fZm-t0-yE6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="m9Z-OL-QxB"/>
+                <constraint firstAttribute="trailing" secondItem="fZm-t0-yE6" secondAttribute="trailing" id="rX4-n5-4Gf"/>
+                <constraint firstItem="fZm-t0-yE6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="slW-Ku-H89"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

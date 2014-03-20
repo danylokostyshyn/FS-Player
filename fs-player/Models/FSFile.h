@@ -17,9 +17,9 @@ typedef enum {
 } FSFileType;
 
 @interface FSFile : NSObject <FSDescriptionProtocol>
+@property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *size;
-@property (nonatomic, strong) NSURL *URL;
 @property (nonatomic) FSFileType type;
 - (BOOL)isPlayable;
 @end

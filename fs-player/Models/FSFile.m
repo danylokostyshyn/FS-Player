@@ -35,4 +35,9 @@
     return nil;
 }
 
+- (UIImage *)imageURL
+{
+    return nil;
+}
+
 @end

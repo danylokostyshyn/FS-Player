@@ -40,4 +40,9 @@
     }
 }
 
+- (UIImage *)imageURL
+{
+    return nil;
+}
+
 @end

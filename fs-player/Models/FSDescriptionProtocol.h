@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @protocol FSDescriptionProtocol <NSObject>
-
 - (NSString *)text;
 - (NSString *)detailText;
+@optional
+- (NSURL *)URL;
 - (UIImage *)image;
-
+- (NSURL *)imageURL;
 @end

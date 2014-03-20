@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+//models
+#import "FSSettings.h"
+
 @interface FSViewController : UIViewController
 + (id)controller;
 @end

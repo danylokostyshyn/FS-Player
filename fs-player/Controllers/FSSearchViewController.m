@@ -8,28 +8,41 @@
 
 #import "FSSearchViewController.h"
 
+//models
 #import "FSDataFetcher.h"
-#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "FSDescriptionProtocol.h"
 
+//views
 #import "FSSearchResultsTableViewCell.h"
 
+//controller
 #import "FSFilesViewController.h"
 
 @interface FSSearchViewController ()
-@property (nonatomic, strong) NSTimer *searchTimer;
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FSSearchResultsTableViewCell *cell;
+@property (nonatomic, strong) UIBarButtonItem *loginBarButtonItem;
+@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSArray *favorites;
 @end
 
 @implementation FSSearchViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (UIBarButtonItem *)loginBarButtonItem
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (!_loginBarButtonItem) {
+        NSString *buttonTitle = nil;
+        if ([FSSettings isLoggedIn]) {
+            buttonTitle = @"Logout";
+        } else {
+            buttonTitle = @"Login";
+        }
+        _loginBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(loginBarButtonPressed:)];
     }
-    return self;
+    return _loginBarButtonItem;
 }
 
 - (FSSearchResultsTableViewCell *)cell
@@ -40,27 +53,23 @@
     return _cell;
 }
 
-//- (NSTimer *)searchTimer
-//{
-//    if (!_searchTimer) {
-//        
-//    }
-//}
-
 #pragma mark - View Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
     
-    [self.searchDisplayController.searchBar becomeFirstResponder];
+    if ([FSSettings isLoggedIn]) {
+        [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
+            self.favorites = items;
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,59 +90,87 @@
     }];
 }
 
+- (void)loginBarButtonPressed:(id)sender
+{
+    if ([FSSettings isLoggedIn]) {
+        UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Log out from fs.ua ?"
+                                                                 message:nil
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Cancel"
+                                                       otherButtonTitles:@"Log out", nil];
+        [loginAlertView show];
+    } else {
+        UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Log in to fs.ua"
+                                                                 message:nil
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Cancel"
+                                                       otherButtonTitles:@"Log in", nil];
+        loginAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        [loginAlertView show];
+    }
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [self.searchResults count];
+    } else if (tableView == self.tableView) {
+        return [self.favorites count];
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id <FSDescriptionProtocol> item = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        static NSString *identifier = @"FSSearchResultsTableViewCell";
-        FSSearchResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (!cell) {
-            cell = self.cell;
-            self.cell = nil;
-        }
-        
-        NSDictionary *item = [self.searchResults objectAtIndex:indexPath.row];
-        
-        cell.titleLabel.text = [item objectForKey:@"title"];
-        cell.categoryLabel.text = [item objectForKey:@"category"];
-        [cell.thumbnailImageView setImageWithURL:[item objectForKey:@"imageURL"]];
-        
-        return cell;
+        item = [self.searchResults objectAtIndex:indexPath.row];
+    } else if (tableView == self.tableView) {
+        item = [self.favorites objectAtIndex:indexPath.row];
+    } else return nil;
+
+    static NSString *identifier = @"FSSearchResultsTableViewCell";
+    FSSearchResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = self.cell;
+        self.cell = nil;
     }
-    return nil;
+
+    cell.titleLabel.text = [item text];
+    cell.categoryLabel.text = [item detailText];
+    [cell.thumbnailImageView setImageWithURL:[item imageURL]];
+    
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id <FSDescriptionProtocol> item = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        NSDictionary *item = [self.searchResults objectAtIndex:indexPath.row];
-        
-        [FSDataFetcher filesFromURL:[item objectForKey:@"URL"] folder:0 showProgressHUD:YES success:^(NSArray *files) {
-            FSFilesViewController *controller = [FSFilesViewController controller];
-            controller.title = [item objectForKey:@"title"];
-            controller.files = files;
-            [self.navigationController pushViewController:controller animated:YES];
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        } failure:^(NSError *error) {
-            
-        }];
-    }
+        item = [self.searchResults objectAtIndex:indexPath.row];
+    } else if (tableView == self.tableView) {
+        item = [self.favorites objectAtIndex:indexPath.row];
+    } else return;
+    
+    [FSDataFetcher filesFromURL:[item URL] folder:0 showProgressHUD:YES success:^(NSArray *files) {
+        FSFilesViewController *controller = [FSFilesViewController controller];
+        controller.title = [item text];
+        controller.files = files;
+        [self.navigationController pushViewController:controller animated:YES];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (tableView == self.searchDisplayController.searchResultsTableView ||
+        tableView == self.tableView) {
         return self.cell.bounds.size.height;
     }
     return 0.f;
@@ -141,39 +178,47 @@
 
 #pragma mark - UISearchBarDelegate
 
-- (void)performSearchWithTextFromSearchBar
-{
-    [self performSearch:self.searchDisplayController.searchBar.text];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     self.searchResults = nil;
-    [self.searchTimer invalidate];
-    self.searchTimer = nil;
-    
-    if ([searchBar.text length] > 0) {
-        self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                            target:self
-                                                          selector:@selector(performSearchWithTextFromSearchBar)
-                                                          userInfo:nil
-                                                           repeats:NO];
-    }
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.searchTimer invalidate];
-    self.searchTimer = nil;
-
     [self performSearch:searchBar.text];
 }
 
-#pragma mark - UISearchDisplayDelegate
+#pragma mark - UIAlertViewDelegate
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    return YES;
+    if (buttonIndex == 1) {
+        if ([FSSettings isLoggedIn]) {
+            self.favorites = nil;
+            [self.tableView reloadData];
+            [FSSettings deleteAllCookies];
+            self.loginBarButtonItem = nil;
+            self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+        } else {
+            NSString *username = ((UITextField *)[alertView textFieldAtIndex:0]).text;
+            NSString *password = ((UITextField *)[alertView textFieldAtIndex:1]).text;
+
+            [FSDataFetcher loginUsingUsername:username password:password success:^{
+                self.loginBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+                
+                [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
+                    self.favorites = items;
+                    [self.tableView reloadData];
+                } failure:^(NSError *error) {
+                    
+                }];
+
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+    }
 }
 
 @end

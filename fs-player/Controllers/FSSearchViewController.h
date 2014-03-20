@@ -8,6 +8,6 @@
 
 #import "FSViewController.h"
 
-@interface FSSearchViewController : FSViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@interface FSSearchViewController : FSViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate>
 
 @end

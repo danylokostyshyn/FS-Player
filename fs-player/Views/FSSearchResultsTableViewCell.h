@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AFNetworking/UIImageView+AFNetworking.h>
+
 @interface FSSearchResultsTableViewCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

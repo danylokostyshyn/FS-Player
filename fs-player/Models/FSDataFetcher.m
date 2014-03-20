@@ -8,10 +8,12 @@
 
 #import "FSDataFetcher.h"
 
+//models
 #import <AFNetworking.h>
 #import "FSHTTPRequestOperation.h"
 #import "TFHpple.h"
 
+#import "FSCatalog.h"
 #import "FSFolder.h"
 #import "FSFile.h"
 
@@ -37,19 +39,21 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
         NSMutableArray *items = [NSMutableArray array];
         NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='main']/table//tr/td[3]/.."];
         for (TFHppleElement *element in elements) {
+            FSCatalog *catalog = [[FSCatalog alloc] init];
+
             TFHppleElement *aTag = [[element searchWithXPathQuery:@"//td[@class='image-wrap']/a"] lastObject];
 
             NSString *pathComponent =  [[aTag attributes] objectForKey:@"href"];
-            NSURL *URL = [[NSURL alloc] initWithScheme:@"http" host:@"brb.to" path:pathComponent];
-            NSString *title = [[aTag attributes] objectForKey:@"title"];
+            catalog.URL = [[NSURL alloc] initWithScheme:@"http" host:@"brb.to" path:pathComponent];
+            catalog.name = [[aTag attributes] objectForKey:@"title"];
 
             TFHppleElement *imgTag = [[aTag childrenWithTagName:@"img"] lastObject];
-            NSURL *imageURL = [NSURL URLWithString:[[imgTag attributes] objectForKey:@"src"]];
+            catalog.thumbnailURL = [NSURL URLWithString:[[imgTag attributes] objectForKey:@"src"]];
 
             TFHppleElement *spanTag = [[element searchWithXPathQuery:@"//td[3]/span"] lastObject];
-            NSString *category = [spanTag text];
+            catalog.category = [spanTag text];
 
-            [items addObject:@{@"URL":URL, @"title":title, @"imageURL":imageURL, @"category":category}];
+            [items addObject:catalog];
         }
         if (successBlock) successBlock(items);
         
@@ -160,6 +164,80 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
         }
 
         if (successBlock) successBlock(files);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) errorBlock(error);
+    }];
+    
+    [[NSOperationQueue mainQueue] addOperation:operation];
+}
+
++ (void)loginUsingUsername:(NSString *)username
+                  password:(NSString *)password
+                   success:(void(^)())successBlock
+                   failure:(void(^)(NSError *error))errorBlock
+{
+    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:@"login.aspx"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
+    request.HTTPMethod = @"POST";
+    NSString *bodyText = [NSString stringWithFormat:@"login=%@&passwd=%@&remember=on", username, password];
+    request.HTTPBody = [bodyText dataUsingEncoding:NSUTF8StringEncoding];
+
+    FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
+    operation.showProgressHUD = YES;
+    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) successBlock();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) errorBlock(error);
+    }];
+
+    [[NSOperationQueue mainQueue] addOperation:operation];
+}
+
++ (void)favoritesWithSuccess:(void(^)(NSArray *items))successBlock
+                   failure:(void(^)(NSError *error))errorBlock
+{
+    NSString *parameters = [NSString stringWithFormat:@"myfavourites.aspx"];
+    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:parameters];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
+    
+    FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
+    operation.showProgressHUD = YES;
+    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray *items = [NSMutableArray array];
+        TFHpple *doc = [[TFHpple alloc] initWithHTMLData:responseObject];
+        NSArray *categoryElements = [doc searchWithXPathQuery:@"//div[@class='b-tabpanels']/div[starts-with(@class,'b-category')]"];
+        for (TFHppleElement *categoryElement in categoryElements) {
+            NSString *categoryName = [[[categoryElement searchWithXPathQuery:@"//span[@class='section-title']/b"] lastObject] text];
+            
+            NSArray *postersElements = [categoryElement searchWithXPathQuery:@"//div[starts-with(@class, 'b-posters')]"];
+            for (TFHppleElement *postersElement in postersElements) {
+                
+                NSArray *posterElements = [postersElement searchWithXPathQuery:@"//div[starts-with(@class, 'b-poster')]"];
+                for (TFHppleElement *posterElement in posterElements) {
+                    TFHppleElement *aTag = [[posterElement childrenWithTagName:@"a"] firstObject];
+                    if (aTag) {
+                        FSCatalog *catalog = [[FSCatalog alloc] init];
+                        catalog.category = categoryName;
+                        catalog.name = [[[aTag searchWithXPathQuery:@"//b/span"] lastObject] text];
+                        
+                        NSString *path = [[aTag attributes] objectForKey:@"href"];
+                        path = [kAPIBaseUrlString stringByAppendingPathComponent:path];
+                        catalog.URL = [NSURL URLWithString:path];
+
+                        NSString *imageURLString = [[aTag attributes] objectForKey:@"style"];
+                        imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"background-image: url('" withString:@""];
+                        imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"')" withString:@""];
+                        catalog.thumbnailURL = [NSURL URLWithString:imageURLString];
+                        
+                        [items addObject:catalog];
+                    }
+                }
+            }
+        }
+        
+        if (successBlock) successBlock(items);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorBlock) errorBlock(error);
     }];

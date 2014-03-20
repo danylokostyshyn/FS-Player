@@ -86,10 +86,11 @@
                 NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:vlcScheme]];
             } else {
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 // download VLC player from AppStore
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
             }
+        } else {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
 }

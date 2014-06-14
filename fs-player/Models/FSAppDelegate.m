@@ -8,20 +8,10 @@
 
 #import "FSAppDelegate.h"
 
-//controllers
-#import "FSSearchViewController.h"
-
 @implementation FSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    FSViewController *controller = [FSSearchViewController controller];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = navController;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
     return YES;
 }
 

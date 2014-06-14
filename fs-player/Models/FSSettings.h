@@ -13,4 +13,7 @@
 + (BOOL)isLoggedIn;
 + (void)deleteAllCookies;
 
++ (NSString *)downloadsDirectory;
++ (NSString *)fileDescriptionAtPath:(NSString *)filePath;
+
 @end

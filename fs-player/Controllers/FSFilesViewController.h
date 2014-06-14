@@ -8,6 +8,6 @@
 
 #import "FSViewController.h"
 
-@interface FSFilesViewController : FSViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FSFilesViewController : FSViewController
 @property (nonatomic, strong) NSArray *files;
 @end

@@ -38,4 +38,44 @@
     }
 }
 
++ (NSString *)downloadsDirectory
+{
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *downloadsPath = [documentsPath stringByAppendingPathComponent:@"Downloads"];
+
+    BOOL isDirectory;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:downloadsPath isDirectory:&isDirectory] && !isDirectory) {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:downloadsPath
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error:&error];
+        if (error) { NSLog(@"%@", error); }
+    }
+
+    return downloadsPath;
+}
+
++ (NSString *)fileDescriptionAtPath:(NSString *)filePath
+{
+    NSError *error;
+    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+        return nil;
+    }
+    
+    NSNumber *size = [attributes objectForKey:NSFileSize];
+    NSString *sizeString = [NSByteCountFormatter stringFromByteCount:[size longLongValue]
+                                                          countStyle:NSByteCountFormatterCountStyleFile];
+    
+    NSDate *modificationDate = [attributes objectForKey:NSFileModificationDate];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HH:mm, MMM dd, yyyy";
+    NSString *modificationDateString = [dateFormatter stringFromDate:modificationDate];
+
+    return [NSString stringWithFormat:@"%@, %@", sizeString, modificationDateString];
+}
+
 @end

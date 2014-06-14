@@ -10,4 +10,5 @@
 
 @interface FSHTTPRequestOperation : AFHTTPRequestOperation
 @property (nonatomic) BOOL showProgressHUD;
+@property (strong, nonatomic) NSString *statusMessage;
 @end

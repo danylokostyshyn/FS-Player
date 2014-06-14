@@ -12,6 +12,7 @@
 #import <AFNetworking.h>
 #import "FSHTTPRequestOperation.h"
 #import "TFHpple.h"
+#import "FSSettings.h"
 
 #import "FSCatalog.h"
 #import "FSFolder.h"
@@ -231,6 +232,8 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                         imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"')" withString:@""];
                         catalog.thumbnailURL = [NSURL URLWithString:imageURLString];
                         
+                        catalog.favorite = YES;
+                        
                         [items addObject:catalog];
                     }
                 }
@@ -244,5 +247,82 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
     
     [[NSOperationQueue mainQueue] addOperation:operation];
 }
+
++ (void)addToOrRemoveFromFavoritesItemWithIdentifier:(NSString *)identifier
+                                       statusMessage:(NSString *)statusMessage
+                                             success:(void(^)())successBlock
+                                             failure:(void(^)(NSError *error))errorBlock
+{
+    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:@"addto/favorites"];
+    path = [path stringByAppendingPathComponent:identifier];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
+    request.HTTPMethod = @"GET";
+    
+    FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
+    operation.statusMessage = statusMessage;
+    operation.showProgressHUD = YES;
+    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) successBlock();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) errorBlock(error);
+    }];
+    
+    [[NSOperationQueue mainQueue] addOperation:operation];
+}
+
++ (void)addToFavoritesItemWithIdentifier:(NSString *)identifier
+                                 success:(void(^)())successBlock
+                                 failure:(void(^)(NSError *error))errorBlock
+{
+    [FSDataFetcher addToOrRemoveFromFavoritesItemWithIdentifier:identifier
+                                                  statusMessage:NSLocalizedString(@"Adding to favorites..", nil)
+                                                        success:successBlock
+                                                        failure:errorBlock];
+}
+
+
++ (void)removeFromFavoritesItemWithIdentifier:(NSString *)identifier
+                                      success:(void(^)())successBlock
+                                      failure:(void(^)(NSError *error))errorBlock
+{
+    [FSDataFetcher addToOrRemoveFromFavoritesItemWithIdentifier:identifier
+                                                  statusMessage:NSLocalizedString(@"Removing from favorites..", nil)
+                                                        success:successBlock
+                                                        failure:errorBlock];
+}
+
++ (void)downloadFileFromURL:(NSURL *)fileURL
+                    success:(void(^)(NSString *filePath))successBlock
+                    failure:(void(^)(NSError *error))errorBlock
+           progressDelegate:(id <FSProgressDelegate>)progressDelegate;
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:fileURL];
+    request.HTTPMethod = @"GET";
+    
+    NSString *fileName = [[[fileURL pathComponents] lastObject] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *downloadsDirectory = [FSSettings downloadsDirectory];
+    NSString *filePath = [downloadsDirectory stringByAppendingPathComponent:fileName];
+    
+    FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
+    operation.statusMessage = NSLocalizedString(@"Downloading..", nil);
+    operation.showProgressHUD = YES;
+    operation.outputStream = [[NSOutputStream alloc] initToFileAtPath:filePath append:YES];
+
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+//        NSLog(@"%d %d %d", bytesRead, totalBytesRead, totalBytesExpectedToRead);
+        CGFloat progress = (double)totalBytesRead / (double)totalBytesExpectedToRead;
+        [progressDelegate progressDidChange:progress];
+    }];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) successBlock(filePath);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) errorBlock(error);
+    }];
+    
+    [[NSOperationQueue mainQueue] addOperation:operation];
+}
+
 
 @end

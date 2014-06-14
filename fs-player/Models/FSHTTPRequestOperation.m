@@ -22,8 +22,13 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
     if (self.showProgressHUD) {
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading", nil)
-                             maskType:SVProgressHUDMaskTypeBlack];
+        if (self.statusMessage) {
+            [SVProgressHUD showWithStatus:self.statusMessage
+                                 maskType:SVProgressHUDMaskTypeBlack];
+        } else {
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading", nil)
+                                 maskType:SVProgressHUDMaskTypeBlack];
+        }
     }
     return [super connection:connection willSendRequest:request redirectResponse:response];
 }

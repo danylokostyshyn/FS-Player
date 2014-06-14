@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		51F76A5F137A482A8B125510 /* libPods-fs-player.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */; };
+		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
+		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
+		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
+		7F979F27194F0BD000327233 /* VDLPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F25194F0BD000327233 /* VDLPlaybackViewController.m */; };
+		7F979F28194F0BD000327233 /* VDLPlaybackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F26194F0BD000327233 /* VDLPlaybackViewController.xib */; };
+		7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F30194F599100327233 /* FSFileTableViewCell.m */; };
+		7F979F36194F915500327233 /* FSProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F35194F915500327233 /* FSProgressButton.m */; };
 		7FCACF0718D839ED009F439A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0618D839ED009F439A /* Foundation.framework */; };
 		7FCACF0918D839ED009F439A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0818D839ED009F439A /* CoreGraphics.framework */; };
 		7FCACF0B18D839ED009F439A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0A18D839ED009F439A /* UIKit.framework */; };
@@ -17,21 +24,32 @@
 		7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3718D83B29009F439A /* FSDataFetcher.m */; };
 		7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3A18D83F54009F439A /* FSViewController.m */; };
 		7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */; };
-		7FCACF4518D853F5009F439A /* FSSearchResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF4418D853F5009F439A /* FSSearchResultsTableViewCell.xib */; };
 		7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */; };
 		7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4B18D85E73009F439A /* FSFilesViewController.m */; };
-		7FCACF4E18D85E99009F439A /* FSFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF4D18D85E99009F439A /* FSFilesViewController.xib */; };
 		7FCACF5118D86053009F439A /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5018D86053009F439A /* FSFile.m */; };
 		7FCACF5418D86063009F439A /* FSFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5318D86063009F439A /* FSFolder.m */; };
 		7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */; };
 		7FCACF5F18D8F0B6009F439A /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */; };
-		7FCACF6118D8F0C1009F439A /* FSSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF6018D8F0C1009F439A /* FSSearchViewController.xib */; };
 		7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6818D9C113009F439A /* FSCatalog.m */; };
 		7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6B18DAE4A4009F439A /* FSSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		29DD53498E284B479F4957F7 /* Pods-fs-player.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.xcconfig"; path = "Pods/Pods-fs-player.xcconfig"; sourceTree = "<group>"; };
+		7F979ECE194ED72800327233 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		7F979ED0194ED78C00327233 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		7F979ED6194EDAD500327233 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		7F979F1E194EE23200327233 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Resources/Main.storyboard; sourceTree = "<group>"; };
+		7F979F20194EFACC00327233 /* FSDownloadedFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSDownloadedFilesViewController.h; path = Controllers/FSDownloadedFilesViewController.h; sourceTree = "<group>"; };
+		7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSDownloadedFilesViewController.m; path = Controllers/FSDownloadedFilesViewController.m; sourceTree = "<group>"; };
+		7F979F24194F0BD000327233 /* VDLPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDLPlaybackViewController.h; sourceTree = "<group>"; };
+		7F979F25194F0BD000327233 /* VDLPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDLPlaybackViewController.m; sourceTree = "<group>"; };
+		7F979F26194F0BD000327233 /* VDLPlaybackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VDLPlaybackViewController.xib; sourceTree = "<group>"; };
+		7F979F2F194F599100327233 /* FSFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFileTableViewCell.h; path = Views/FSFileTableViewCell.h; sourceTree = "<group>"; };
+		7F979F30194F599100327233 /* FSFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFileTableViewCell.m; path = Views/FSFileTableViewCell.m; sourceTree = "<group>"; };
+		7F979F34194F915500327233 /* FSProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSProgressButton.h; path = Views/FSProgressButton.h; sourceTree = "<group>"; };
+		7F979F35194F915500327233 /* FSProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSProgressButton.m; path = Views/FSProgressButton.m; sourceTree = "<group>"; };
 		7FCACF0318D839ED009F439A /* fs-player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fs-player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCACF0618D839ED009F439A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FCACF0818D839ED009F439A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,12 +66,10 @@
 		7FCACF3A18D83F54009F439A /* FSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSViewController.m; path = Controllers/FSViewController.m; sourceTree = "<group>"; };
 		7FCACF3D18D83F7F009F439A /* FSSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchViewController.h; path = Controllers/FSSearchViewController.h; sourceTree = "<group>"; };
 		7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchViewController.m; path = Controllers/FSSearchViewController.m; sourceTree = "<group>"; };
-		7FCACF4418D853F5009F439A /* FSSearchResultsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSSearchResultsTableViewCell.xib; path = Resources/NIBs/FSSearchResultsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		7FCACF4618D854F1009F439A /* FSSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchResultsTableViewCell.h; path = Views/FSSearchResultsTableViewCell.h; sourceTree = "<group>"; };
 		7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchResultsTableViewCell.m; path = Views/FSSearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		7FCACF4A18D85E73009F439A /* FSFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFilesViewController.h; path = Controllers/FSFilesViewController.h; sourceTree = "<group>"; };
 		7FCACF4B18D85E73009F439A /* FSFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFilesViewController.m; path = Controllers/FSFilesViewController.m; sourceTree = "<group>"; };
-		7FCACF4D18D85E99009F439A /* FSFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSFilesViewController.xib; path = Resources/NIBs/FSFilesViewController.xib; sourceTree = SOURCE_ROOT; };
 		7FCACF4F18D86053009F439A /* FSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFile.h; path = Models/FSFile.h; sourceTree = "<group>"; };
 		7FCACF5018D86053009F439A /* FSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFile.m; path = Models/FSFile.m; sourceTree = "<group>"; };
 		7FCACF5218D86063009F439A /* FSFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFolder.h; path = Models/FSFolder.h; sourceTree = "<group>"; };
@@ -63,7 +79,6 @@
 		7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSHTTPRequestOperation.m; path = Models/FSHTTPRequestOperation.m; sourceTree = "<group>"; };
 		7FCACF5D18D8F0B6009F439A /* FSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAppDelegate.h; path = Models/FSAppDelegate.h; sourceTree = "<group>"; };
 		7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAppDelegate.m; path = Models/FSAppDelegate.m; sourceTree = "<group>"; };
-		7FCACF6018D8F0C1009F439A /* FSSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSSearchViewController.xib; path = Resources/NIBs/FSSearchViewController.xib; sourceTree = SOURCE_ROOT; };
 		7FCACF6718D9C113009F439A /* FSCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCatalog.h; path = Models/FSCatalog.h; sourceTree = "<group>"; };
 		7FCACF6818D9C113009F439A /* FSCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCatalog.m; path = Models/FSCatalog.m; sourceTree = "<group>"; };
 		7FCACF6A18DAE4A4009F439A /* FSSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSettings.h; path = Models/FSSettings.h; sourceTree = "<group>"; };
@@ -76,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */,
 				7FCACF0918D839ED009F439A /* CoreGraphics.framework in Frameworks */,
 				7FCACF0B18D839ED009F439A /* UIKit.framework in Frameworks */,
 				7FCACF0718D839ED009F439A /* Foundation.framework in Frameworks */,
@@ -86,9 +102,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F979F23194F0BD000327233 /* Dropin-Player */ = {
+			isa = PBXGroup;
+			children = (
+				7F979F24194F0BD000327233 /* VDLPlaybackViewController.h */,
+				7F979F25194F0BD000327233 /* VDLPlaybackViewController.m */,
+				7F979F26194F0BD000327233 /* VDLPlaybackViewController.xib */,
+			);
+			name = "Dropin-Player";
+			path = "Thirparties/Dropin-Player";
+			sourceTree = "<group>";
+		};
 		7FCACEFA18D839ED009F439A = {
 			isa = PBXGroup;
 			children = (
+				7F979F23194F0BD000327233 /* Dropin-Player */,
 				7FCACF0C18D839ED009F439A /* fs-player */,
 				7FCACF0518D839ED009F439A /* Frameworks */,
 				7FCACF0418D839ED009F439A /* Products */,
@@ -107,6 +135,10 @@
 		7FCACF0518D839ED009F439A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F979ED6194EDAD500327233 /* libstdc++.6.dylib */,
+				7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */,
+				7F979ED0194ED78C00327233 /* libstdc++.dylib */,
+				7F979ECE194ED72800327233 /* libc++.dylib */,
 				7FCACF0618D839ED009F439A /* Foundation.framework */,
 				7FCACF0818D839ED009F439A /* CoreGraphics.framework */,
 				7FCACF0A18D839ED009F439A /* UIKit.framework */,
@@ -170,24 +202,16 @@
 				7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */,
 				7FCACF4A18D85E73009F439A /* FSFilesViewController.h */,
 				7FCACF4B18D85E73009F439A /* FSFilesViewController.m */,
+				7F979F20194EFACC00327233 /* FSDownloadedFilesViewController.h */,
+				7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		7FCACF4218D83FCC009F439A /* NIBs */ = {
-			isa = PBXGroup;
-			children = (
-				7FCACF5C18D8EF10009F439A /* Cells */,
-				7FCACF6018D8F0C1009F439A /* FSSearchViewController.xib */,
-				7FCACF4D18D85E99009F439A /* FSFilesViewController.xib */,
-			);
-			name = NIBs;
 			sourceTree = "<group>";
 		};
 		7FCACF4318D83FD1009F439A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7FCACF4218D83FCC009F439A /* NIBs */,
+				7F979F1E194EE23200327233 /* Main.storyboard */,
 				7FCACF1818D839ED009F439A /* Images.xcassets */,
 			);
 			name = Resources;
@@ -198,16 +222,12 @@
 			children = (
 				7FCACF4618D854F1009F439A /* FSSearchResultsTableViewCell.h */,
 				7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */,
+				7F979F2F194F599100327233 /* FSFileTableViewCell.h */,
+				7F979F30194F599100327233 /* FSFileTableViewCell.m */,
+				7F979F34194F915500327233 /* FSProgressButton.h */,
+				7F979F35194F915500327233 /* FSProgressButton.m */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		7FCACF5C18D8EF10009F439A /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				7FCACF4418D853F5009F439A /* FSSearchResultsTableViewCell.xib */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FCACF1118D839ED009F439A /* InfoPlist.strings in Resources */,
-				7FCACF6118D8F0C1009F439A /* FSSearchViewController.xib in Resources */,
-				7FCACF4518D853F5009F439A /* FSSearchResultsTableViewCell.xib in Resources */,
+				7F979F1F194EE23200327233 /* Main.storyboard in Resources */,
+				7F979F28194F0BD000327233 /* VDLPlaybackViewController.xib in Resources */,
 				7FCACF1918D839ED009F439A /* Images.xcassets in Resources */,
-				7FCACF4E18D85E99009F439A /* FSFilesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,11 +331,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F979F27194F0BD000327233 /* VDLPlaybackViewController.m in Sources */,
 				7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */,
 				7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */,
+				7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */,
 				7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */,
 				7FCACF1318D839ED009F439A /* main.m in Sources */,
 				7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */,
+				7F979F36194F915500327233 /* FSProgressButton.m in Sources */,
+				7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */,
 				7FCACF5118D86053009F439A /* FSFile.m in Sources */,
 				7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */,
 				7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */,

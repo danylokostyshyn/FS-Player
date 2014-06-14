@@ -13,7 +13,10 @@
 #import "FSFile.h"
 #import "FSFolder.h"
 
-@interface FSFilesViewController ()
+//views
+#import "FSFileTableViewCell.h"
+
+@interface FSFilesViewController () <UITableViewDataSource, UITableViewDelegate, FSFileTableViewCellDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @end
 
@@ -31,7 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,18 +51,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"FSFilesTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+    id item = [self.files objectAtIndex:indexPath.row];
+
+    if ([item isKindOfClass:[FSFolder class]]) {
+
+        static NSString *subtitleCellIdentifier = @"subtitleTableViewCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subtitleCellIdentifier];
+        
+        id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
+        cell.textLabel.text = [item text];
+        cell.detailTextLabel.text = [item detailText];
+        cell.imageView.image = [item image];
+        
+        return cell;
+
+    } else if ([item isKindOfClass:[FSFile class]]) {
+    
+        static NSString *fileCellIdentifier = @"fileTableViewCell";
+        FSFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fileCellIdentifier];
+        cell.delegate = self;
+        
+        id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
+        cell.titleLabel.text = [item text];
+        cell.sizeLabel.text = [item detailText];
+        
+        return cell;
+        
     }
     
-    id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
-    cell.textLabel.text = [item text];
-    cell.detailTextLabel.text = [item detailText];
-    cell.imageView.image = [item image];
-
-    return cell;
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -68,19 +87,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id item = [self.files objectAtIndex:indexPath.row];
+
     if ([item isKindOfClass:[FSFolder class]]) {
+
         FSFolder *folder = (FSFolder *)item;
         [FSDataFetcher filesFromURL:folder.URL folder:folder.identifier showProgressHUD:YES success:^(NSArray *files) {
-            FSFilesViewController *controller = [FSFilesViewController controller];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FSFilesViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"filesViewController"];
             controller.title = folder.name;
             controller.files = files;
+
             [self.navigationController pushViewController:controller animated:YES];
+
         } failure:^(NSError *error) {
             
         }];
-    } else if ([item isKindOfClass:[FSFile class]]) {
-        FSFile *file = (FSFile *)item;
         
+    }
+}
+
+#pragma mark - FSFileTableViewCellDelegate
+
+- (void)fileTableViewCellDidPressPlayButton:(FSFileTableViewCell *)cell
+{
+    NSUInteger index = [self.tableView indexPathForCell:cell].row;
+    id item = [self.files objectAtIndex:index];
+    
+    if ([item isKindOfClass:[FSFile class]]) {
+        FSFile *file = (FSFile *)item;
         if ([file isPlayable]) {
             if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vlc://"]]) {
                 NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
@@ -89,8 +124,19 @@
                 // download VLC player from AppStore
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
             }
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+    }
+}
+
+- (void)fileTableViewCellDidPressDownloadButton:(FSFileTableViewCell *)cell
+{
+    NSUInteger index = [self.tableView indexPathForCell:cell].row;
+    id item = [self.files objectAtIndex:index];
+    
+    if ([item isKindOfClass:[FSFile class]]) {
+        FSFile *file = (FSFile *)item;
+        if ([file isPlayable]) {
+            [FSDataFetcher downloadFileFromURL:file.URL success:nil failure:nil progressDelegate:cell];
         }
     }
 }

@@ -18,9 +18,8 @@
 //controller
 #import "FSFilesViewController.h"
 
-@interface FSSearchViewController ()
+@interface FSSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) FSSearchResultsTableViewCell *cell;
 @property (nonatomic, strong) UIBarButtonItem *loginBarButtonItem;
 @property (nonatomic, strong) NSArray *searchResults;
 @property (nonatomic, strong) NSArray *favorites;
@@ -45,14 +44,6 @@
     return _loginBarButtonItem;
 }
 
-- (FSSearchResultsTableViewCell *)cell
-{
-    if (!_cell) {
-        _cell = [[[NSBundle mainBundle] loadNibNamed:@"FSSearchResultsTableViewCell" owner:self options:nil] lastObject];
-    }
-    return _cell;
-}
-
 #pragma mark - View Life Cycle
 
 - (void)viewDidLoad
@@ -60,6 +51,8 @@
     [super viewDidLoad];
 
     self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    self.searchDisplayController.searchResultsTableView.rowHeight = 60.f;
+    
     self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
     
     if ([FSSettings isLoggedIn]) {
@@ -106,6 +99,8 @@
                                                        cancelButtonTitle:@"Cancel"
                                                        otherButtonTitles:@"Log in", nil];
         loginAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        ((UITextField *)[loginAlertView textFieldAtIndex:0]).text = @"danylok";
+        ((UITextField *)[loginAlertView textFieldAtIndex:1]).text = @"XhCLKsuNxWW74p";        
         [loginAlertView show];
     }
 }
@@ -126,18 +121,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id <FSDescriptionProtocol> item = nil;
+
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         item = [self.searchResults objectAtIndex:indexPath.row];
     } else if (tableView == self.tableView) {
         item = [self.favorites objectAtIndex:indexPath.row];
     } else return nil;
 
-    static NSString *identifier = @"FSSearchResultsTableViewCell";
-    FSSearchResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = self.cell;
-        self.cell = nil;
-    }
+    static NSString *identifier = @"searchResultsTableViewCell";
+    FSSearchResultsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
 
     cell.titleLabel.text = [item text];
     cell.categoryLabel.text = [item detailText];
@@ -150,30 +142,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id <FSDescriptionProtocol> item = nil;
+    id <FSDescriptionProtocol> selectedItem;
+
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        item = [self.searchResults objectAtIndex:indexPath.row];
+        selectedItem = [self.searchResults objectAtIndex:indexPath.row];
     } else if (tableView == self.tableView) {
-        item = [self.favorites objectAtIndex:indexPath.row];
+        selectedItem = [self.favorites objectAtIndex:indexPath.row];
     } else return;
     
-    [FSDataFetcher filesFromURL:[item URL] folder:0 showProgressHUD:YES success:^(NSArray *files) {
-        FSFilesViewController *controller = [FSFilesViewController controller];
-        controller.title = [item text];
-        controller.files = files;
-        [self.navigationController pushViewController:controller animated:YES];
+    [FSDataFetcher filesFromURL:[selectedItem URL] folder:0 showProgressHUD:YES success:^(NSArray *files) {
+        [self performSegueWithIdentifier:@"filesSegue"
+                                  sender:@{@"selectedItem":selectedItem, @"files":files}];
     } failure:^(NSError *error) {
-
+        
     }];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView ||
-        tableView == self.tableView) {
-        return self.cell.bounds.size.height;
+    if ([segue.identifier isEqualToString:@"filesSegue"]) {
+
+        id <FSDescriptionProtocol> selectedItem = [sender objectForKey:@"selectedItem"];
+        NSArray *files = [sender objectForKey:@"files"];
+        
+        FSFilesViewController *controller = segue.destinationViewController;
+        controller.title = [selectedItem text];
+        controller.files = files;
     }
-    return 0.f;
 }
 
 #pragma mark - UISearchBarDelegate

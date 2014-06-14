@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FSFileTableViewCell.h"
+
 @interface FSDataFetcher : NSObject
 
 + (void)searchForText:(NSString *)searchText
@@ -28,5 +30,18 @@
 
 + (void)favoritesWithSuccess:(void(^)(NSArray *items))successBlock // array of FSCatalog
                      failure:(void(^)(NSError *error))errorBlock;
+
++ (void)addToFavoritesItemWithIdentifier:(NSString *)identifier
+                                 success:(void(^)())successBlock
+                                 failure:(void(^)(NSError *error))errorBlock;
+
++ (void)removeFromFavoritesItemWithIdentifier:(NSString *)identifier
+                                      success:(void(^)())successBlock
+                                      failure:(void(^)(NSError *error))errorBlock;
+
++ (void)downloadFileFromURL:(NSURL *)fileURL
+                    success:(void(^)(NSString *filePath))successBlock
+                    failure:(void(^)(NSError *error))errorBlock
+                   progressDelegate:(id <FSProgressDelegate>)progressDelegate;
 
 @end

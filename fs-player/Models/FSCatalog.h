@@ -15,4 +15,5 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSURL *thumbnailURL;
 @property (nonatomic, strong) NSString *category;
+@property (nonatomic, getter = isFavorite) BOOL favorite;
 @end

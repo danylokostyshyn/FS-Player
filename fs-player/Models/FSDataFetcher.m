@@ -38,22 +38,15 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         TFHpple *doc = [[TFHpple alloc] initWithHTMLData:responseObject];
         NSMutableArray *items = [NSMutableArray array];
-        NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='main']/table//tr/td[3]/.."];
+        NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='b-search-page__results']/a"];
         for (TFHppleElement *element in elements) {
             FSCatalog *catalog = [[FSCatalog alloc] init];
-
-            TFHppleElement *aTag = [[element searchWithXPathQuery:@"//td[@class='image-wrap']/a"] lastObject];
-
-            NSString *pathComponent =  [[aTag attributes] objectForKey:@"href"];
+            NSString *pathComponent =  [[element attributes] objectForKey:@"href"];
             catalog.URL = [[NSURL alloc] initWithScheme:@"http" host:@"brb.to" path:pathComponent];
-            catalog.name = [[aTag attributes] objectForKey:@"title"];
-
-            TFHppleElement *imgTag = [[aTag childrenWithTagName:@"img"] lastObject];
-            catalog.thumbnailURL = [NSURL URLWithString:[[imgTag attributes] objectForKey:@"src"]];
-
-            TFHppleElement *spanTag = [[element searchWithXPathQuery:@"//td[3]/span"] lastObject];
-            catalog.category = [spanTag text];
-
+            catalog.name = [[[element searchWithXPathQuery:@"//@title"] lastObject] text];
+            NSString *imgSrc = [[[element searchWithXPathQuery:@"//img/@src"] lastObject] text];
+            catalog.thumbnailURL = [NSURL URLWithString:imgSrc];
+            catalog.category = [[[element searchWithXPathQuery:@"//span[@class='b-search-page__results-item-subsection']"] lastObject] text];
             [items addObject:catalog];
         }
         if (successBlock) successBlock(items);
@@ -85,7 +78,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
         TFHppleElement *ulTag = [[doc searchWithXPathQuery:@"//*[starts-with(@class,'filelist')]"] lastObject];
         for (TFHppleElement *liTag in [ulTag children]) {
             NSString *classValue = [[liTag attributes] objectForKey:@"class"];
-            if ([classValue isEqualToString:@"folder"]) {
+            if ([classValue hasPrefix:@"folder"]) {
                 FSFolder *folder = [[FSFolder alloc] init];
                 folder.URL = URL;
 
@@ -135,9 +128,9 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                     }
                 }
                 
-                folder.size = [((TFHppleElement *)[[liTag childrenWithClassName:@"material-size"] lastObject]) text];
+                folder.size = [((TFHppleElement *)[[liTag childrenWithClassName:@"material-details"] lastObject]) text];
                 folder.dateString = [((TFHppleElement *)[[liTag childrenWithClassName:@"material-date"] lastObject]) text];
-                folder.details = [((TFHppleElement *)[[liTag childrenWithClassName:@"material-details"] lastObject]) text];
+                folder.details = [((TFHppleElement *)[[liTag childrenWithClassName:@"material-details"] firstObject]) text];
 
                 [files addObject:folder];
              }

@@ -103,7 +103,8 @@
         } failure:^(NSError *error) {
             
         }];
-        
+    } else if ([item isKindOfClass:[FSFile class]]) {
+        [self fileTableViewCellDidPressPlayButton:(FSFileTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]];
     }
 }
 

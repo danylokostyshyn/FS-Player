@@ -26,6 +26,11 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+@class VDLPlaybackViewController;
+@protocol VDLPlaybackViewControllerDelegate <NSObject>
+- (void)playbackControllerDidFinishPlayback:(VDLPlaybackViewController *)playbackController;
+@end
+
 @interface VDLPlaybackViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIView *movieView;
@@ -37,6 +42,7 @@
 @property (nonatomic, strong) IBOutlet UINavigationBar *toolbar;
 @property (nonatomic, strong) IBOutlet UIView *controllerPanel;
 @property (nonatomic, strong) IBOutlet MPVolumeView *volumeView;
+@property (nonatomic, weak) id<VDLPlaybackViewControllerDelegate> delegate;
 
 - (void)playMediaFromURL:(NSURL*)theURL;
 

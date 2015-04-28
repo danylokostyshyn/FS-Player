@@ -25,10 +25,9 @@
 
 #import "VDLPlaybackViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
 #import <MobileVLCKit/MobileVLCKit.h>
 
-@interface VDLPlaybackViewController () <UIGestureRecognizerDelegate, UIActionSheetDelegate>
+@interface VDLPlaybackViewController () <UIActionSheetDelegate>
 {
     VLCMediaPlayer *_mediaplayer;
     BOOL _setPosition;
@@ -78,10 +77,8 @@
            forControlEvents:UIControlEventValueChanged];
 
     /* setup gesture recognizer to toggle controls' visibility */
-    _movieView.userInteractionEnabled = NO;
     UITapGestureRecognizer *tapOnVideoRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleControlsVisible)];
-    tapOnVideoRecognizer.delegate = self;
-    [self.view addGestureRecognizer:tapOnVideoRecognizer];
+    [self.movieView addGestureRecognizer:tapOnVideoRecognizer];
 }
 
 - (void)playMediaFromURL:(NSURL*)theURL
@@ -99,7 +96,8 @@
 
 - (IBAction)closePlayback:(id)sender
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate playbackControllerDidFinishPlayback:self];
+    self.delegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,7 +107,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
     /* setup the media player instance, give it a delegate and something to draw into */
-    _mediaplayer = [[VLCMediaPlayer alloc] init];
+    _mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--avi-index=2", @"--play-and-pause"]];
     _mediaplayer.delegate = self;
     _mediaplayer.drawable = self.movieView;
 
@@ -119,7 +117,6 @@
 
     /* create a media object and give it to the player */
     _mediaplayer.media = [VLCMedia mediaWithURL:_url];
-//    _mediaplayer.media = [VLCMedia mediaWithPath:[_url path]];
 
     [_mediaplayer play];
 

@@ -16,7 +16,9 @@
 //views
 #import "FSFileTableViewCell.h"
 
-@interface FSFilesViewController () <UITableViewDataSource, UITableViewDelegate, FSFileTableViewCellDelegate>
+#import "VDLPlaybackViewController.h"
+
+@interface FSFilesViewController () <UITableViewDataSource, UITableViewDelegate, FSFileTableViewCellDelegate, VDLPlaybackViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @end
 
@@ -67,13 +69,12 @@
 
     } else if ([item isKindOfClass:[FSFile class]]) {
     
-        static NSString *fileCellIdentifier = @"fileTableViewCell";
-        FSFileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fileCellIdentifier];
-        cell.delegate = self;
+        static NSString *fileCellIdentifier = @"subtitleTableViewCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fileCellIdentifier];
         
         id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
-        cell.titleLabel.text = [item text];
-        cell.sizeLabel.text = [item detailText];
+        cell.textLabel.text = [item text];
+        cell.detailTextLabel.text = [item detailText];
         
         return cell;
         
@@ -118,13 +119,18 @@
     if ([item isKindOfClass:[FSFile class]]) {
         FSFile *file = (FSFile *)item;
         if ([file isPlayable]) {
-            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vlc://"]]) {
-                NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:vlcScheme]];
-            } else {
+            VDLPlaybackViewController *controller = [[VDLPlaybackViewController alloc] initWithNibName:@"VDLPlaybackViewController" bundle:nil];
+            controller.delegate = self;
+            [self.navigationController presentViewController:controller animated:YES completion:nil];
+            [controller playMediaFromURL:file.URL];
+            
+//            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vlc://"]]) {
+//                NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:vlcScheme]];
+//            } else {
                 // download VLC player from AppStore
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
-            }
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
+//            }
         }
     }
 }
@@ -140,6 +146,13 @@
             [FSDataFetcher downloadFileFromURL:file.URL success:nil failure:nil progressDelegate:cell];
         }
     }
+}
+
+#pragma mar - VDLPlaybackViewControllerDelegate
+
+- (void)playbackControllerDidFinishPlayback:(VDLPlaybackViewController *)playbackController
+{
+    [playbackController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

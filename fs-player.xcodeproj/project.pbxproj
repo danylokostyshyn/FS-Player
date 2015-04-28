@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		29DD53498E284B479F4957F7 /* Pods-fs-player.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.xcconfig"; path = "Pods/Pods-fs-player.xcconfig"; sourceTree = "<group>"; };
+		5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.release.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.release.xcconfig"; sourceTree = "<group>"; };
 		7F979ECE194ED72800327233 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED0194ED78C00327233 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
@@ -83,6 +83,7 @@
 		7FCACF6818D9C113009F439A /* FSCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCatalog.m; path = Models/FSCatalog.m; sourceTree = "<group>"; };
 		7FCACF6A18DAE4A4009F439A /* FSSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSettings.h; path = Models/FSSettings.h; sourceTree = "<group>"; };
 		7FCACF6B18DAE4A4009F439A /* FSSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSettings.m; path = Models/FSSettings.m; sourceTree = "<group>"; };
+		8F4461FAE5DB66E2E11E220B /* Pods-fs-player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.debug.xcconfig"; sourceTree = "<group>"; };
 		AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fs-player.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -102,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EE662C5F2B24FF2199FB409 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F4461FAE5DB66E2E11E220B /* Pods-fs-player.debug.xcconfig */,
+				5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7F979F23194F0BD000327233 /* Dropin-Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +130,7 @@
 				7FCACF0C18D839ED009F439A /* fs-player */,
 				7FCACF0518D839ED009F439A /* Frameworks */,
 				7FCACF0418D839ED009F439A /* Products */,
-				29DD53498E284B479F4957F7 /* Pods-fs-player.xcconfig */,
+				7EE662C5F2B24FF2199FB409 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,7 +316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-fs-player-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fs-player/Pods-fs-player-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		61E1A94221A64C87BE78C07B /* Check Pods Manifest.lock */ = {
@@ -436,32 +446,32 @@
 		};
 		7FCACF3018D839ED009F439A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29DD53498E284B479F4957F7 /* Pods-fs-player.xcconfig */;
+			baseConfigurationReference = 8F4461FAE5DB66E2E11E220B /* Pods-fs-player.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		7FCACF3118D839ED009F439A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29DD53498E284B479F4957F7 /* Pods-fs-player.xcconfig */;
+			baseConfigurationReference = 5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

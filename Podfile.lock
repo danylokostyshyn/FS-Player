@@ -1,37 +1,39 @@
 PODS:
-  - AFNetworking (2.2.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-    - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.1):
+  - AFNetworking/NSURLSession (2.5.2):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.1):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.1)
-  - AFNetworking/Security (2.2.1)
-  - AFNetworking/Serialization (2.2.1)
-  - AFNetworking/UIKit (2.2.1):
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - hpple (HEAD based on 0.2.0)
-  - MobileVLCKit (2.2.0)
-  - SVProgressHUD (1.0)
+  - hpple (0.2.0)
+  - MobileVLCKit (2.2.1)
+  - SVProgressHUD (1.1.3)
 
 DEPENDENCIES:
   - AFNetworking
-  - hpple (HEAD)
+  - hpple
   - MobileVLCKit
   - SVProgressHUD
 
 SPEC CHECKSUMS:
-  AFNetworking: 8dde8c8a6597ad95dac332a593c27e541bc87371
-  hpple: f4eb7c21a8db83ec264e5d614ec7509e10e5adec
-  MobileVLCKit: 9540b6ce72572dd17ffc0460b9480b1ce3d8e625
-  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
+  MobileVLCKit: bb3359b2221316554129beb0c45827803a2de9be
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.36.3

@@ -18,8 +18,10 @@
 //controller
 #import "FSFilesViewController.h"
 
-@interface FSSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UIAlertViewDelegate>
+@interface FSSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, UIAlertViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) NSTimer *searchTimer;
 @property (nonatomic, strong) UIBarButtonItem *loginBarButtonItem;
 @property (nonatomic, strong) NSArray *searchResults;
 @property (nonatomic, strong) NSArray *favorites;
@@ -44,16 +46,26 @@
     return _loginBarButtonItem;
 }
 
+- (UISearchController *)searchController
+{
+    if (!_searchController) {
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchController.searchResultsUpdater = self;
+        _searchController.hidesNavigationBarDuringPresentation = NO;
+        _searchController.dimsBackgroundDuringPresentation = NO;
+        _searchController.searchBar.delegate = self;
+    }
+    return _searchController;
+}
+
 #pragma mark - View Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
-    self.searchDisplayController.searchResultsTableView.rowHeight = 60.f;
-    
     self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+    self.navigationItem.titleView = self.searchController.searchBar;
     
     if ([FSSettings isLoggedIn]) {
         [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
@@ -73,14 +85,17 @@
 
 #pragma mark - Private Methods
 
-- (void)performSearch:(NSString *)searchString
+- (void)performSearch
 {
-    [FSDataFetcher searchForText:searchString showProgressHUD:YES success:^(NSArray *items) {
-        self.searchResults = items;
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    } failure:^(NSError *error) {
-        
-    }];
+    NSString *pattern = self.searchController.searchBar.text;
+    if ([pattern length] > 0) {
+        [FSDataFetcher searchForText:pattern showProgressHUD:YES success:^(NSArray *items) {
+            self.searchResults = items;
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)loginBarButtonPressed:(id)sender
@@ -110,7 +125,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active) {
         return [self.searchResults count];
     } else if (tableView == self.tableView) {
         return [self.favorites count];
@@ -122,7 +137,7 @@
 {
     id <FSDescriptionProtocol> item = nil;
 
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active) {
         item = [self.searchResults objectAtIndex:indexPath.row];
     } else if (tableView == self.tableView) {
         item = [self.favorites objectAtIndex:indexPath.row];
@@ -144,7 +159,7 @@
 {
     id <FSDescriptionProtocol> selectedItem;
 
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active) {
         selectedItem = [self.searchResults objectAtIndex:indexPath.row];
     } else if (tableView == self.tableView) {
         selectedItem = [self.favorites objectAtIndex:indexPath.row];
@@ -173,17 +188,30 @@
     }
 }
 
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    [self.searchTimer invalidate];
+    [self.tableView reloadData];
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                        target:self
+                                                      selector:@selector(performSearch)
+                                                      userInfo:nil
+                                                       repeats:NO];
+}
+
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    self.searchResults = nil;
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [self performSearch:searchBar.text];
-}
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+//{
+//    self.searchResults = nil;
+//}
+//
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//    [self performSearch:searchBar.text];
+//}
 
 #pragma mark - UIAlertViewDelegate
 

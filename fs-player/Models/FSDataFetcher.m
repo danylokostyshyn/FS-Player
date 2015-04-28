@@ -302,7 +302,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
     operation.showProgressHUD = YES;
     operation.outputStream = [[NSOutputStream alloc] initToFileAtPath:filePath append:YES];
 
-    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
 //        NSLog(@"%d %d %d", bytesRead, totalBytesRead, totalBytesExpectedToRead);
         CGFloat progress = (double)totalBytesRead / (double)totalBytesExpectedToRead;
         [progressDelegate progressDidChange:progress];

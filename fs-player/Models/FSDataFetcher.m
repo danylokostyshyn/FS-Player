@@ -20,8 +20,6 @@
 
 @implementation FSDataFetcher
 
-static NSString *kAPIBaseUrlString = @"http://brb.to";
-
 + (void)searchForText:(NSString *)searchText
       showProgressHUD:(BOOL)showProgressHUD
               success:(void(^)(NSArray *items))successBlock
@@ -29,7 +27,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
 {
     NSString *encodedSearchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *parameters = [NSString stringWithFormat:@"search.aspx?search=%@", encodedSearchText];
-    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:parameters];
+    NSString *path = [FS_API_ENDPOINT stringByAppendingPathComponent:parameters];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
@@ -170,7 +168,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                    success:(void(^)())successBlock
                    failure:(void(^)(NSError *error))errorBlock
 {
-    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:@"login.aspx"];
+    NSString *path = [FS_API_ENDPOINT stringByAppendingPathComponent:@"login.aspx"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
     request.HTTPMethod = @"POST";
     NSString *bodyText = [NSString stringWithFormat:@"login=%@&passwd=%@&remember=on", username, password];
@@ -192,7 +190,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                    failure:(void(^)(NSError *error))errorBlock
 {
     NSString *parameters = [NSString stringWithFormat:@"myfavourites.aspx"];
-    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:parameters];
+    NSString *path = [FS_API_ENDPOINT stringByAppendingPathComponent:parameters];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
     
     FSHTTPRequestOperation *operation = [[FSHTTPRequestOperation alloc] initWithRequest:request];
@@ -217,7 +215,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                         catalog.name = [[[aTag searchWithXPathQuery:@"//b/span"] lastObject] text];
                         
                         NSString *path = [[aTag attributes] objectForKey:@"href"];
-                        path = [kAPIBaseUrlString stringByAppendingPathComponent:path];
+                        path = [FS_API_ENDPOINT stringByAppendingPathComponent:path];
                         catalog.URL = [NSURL URLWithString:path];
 
                         NSString *imageURLString = [[aTag attributes] objectForKey:@"style"];
@@ -246,7 +244,7 @@ static NSString *kAPIBaseUrlString = @"http://brb.to";
                                              success:(void(^)())successBlock
                                              failure:(void(^)(NSError *error))errorBlock
 {
-    NSString *path = [kAPIBaseUrlString stringByAppendingPathComponent:@"addto/favorites"];
+    NSString *path = [FS_API_ENDPOINT stringByAppendingPathComponent:@"addto/favorites"];
     path = [path stringByAppendingPathComponent:identifier];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
     request.HTTPMethod = @"GET";

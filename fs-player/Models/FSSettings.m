@@ -8,11 +8,13 @@
 
 #import "FSSettings.h"
 
+#import "FSDataFetcher.h"
+
 @implementation FSSettings
 
 + (BOOL)isLoggedIn
 {
-    NSURL *siteURL = [NSURL URLWithString:@"http://brb.to/"];
+    NSURL *siteURL = [NSURL URLWithString:FS_API_ENDPOINT];
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:siteURL];
     int authCookiesCount = 0;
     
@@ -31,7 +33,7 @@
 
 + (void)deleteAllCookies
 {
-    NSURL *siteURL = [NSURL URLWithString:@"http://brb.to/"];
+    NSURL *siteURL = [NSURL URLWithString:FS_API_ENDPOINT];
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:siteURL];
     for (NSHTTPCookie *cookie in cookies) {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];

@@ -10,6 +10,8 @@
 
 #import "FSFileTableViewCell.h"
 
+#define FS_API_ENDPOINT @"http://fs.to"
+
 @interface FSDataFetcher : NSObject
 
 + (void)searchForText:(NSString *)searchText

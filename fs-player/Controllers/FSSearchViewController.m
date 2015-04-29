@@ -54,6 +54,7 @@
         _searchController.hidesNavigationBarDuringPresentation = NO;
         _searchController.dimsBackgroundDuringPresentation = NO;
         _searchController.searchBar.delegate = self;
+        _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     }
     return _searchController;
 }
@@ -114,8 +115,6 @@
                                                        cancelButtonTitle:@"Cancel"
                                                        otherButtonTitles:@"Log in", nil];
         loginAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-        ((UITextField *)[loginAlertView textFieldAtIndex:0]).text = @"danylok";
-        ((UITextField *)[loginAlertView textFieldAtIndex:1]).text = @"XhCLKsuNxWW74p";        
         [loginAlertView show];
     }
 }

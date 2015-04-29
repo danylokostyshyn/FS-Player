@@ -123,14 +123,6 @@
             controller.delegate = self;
             [self.navigationController presentViewController:controller animated:YES completion:nil];
             [controller playMediaFromURL:file.URL];
-            
-//            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vlc://"]]) {
-//                NSString *vlcScheme = [[file.URL absoluteString] stringByReplacingOccurrencesOfString:@"http://" withString:@"vlc://"];
-//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:vlcScheme]];
-//            } else {
-                // download VLC player from AppStore
-//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id650377962"]];
-//            }
         }
     }
 }

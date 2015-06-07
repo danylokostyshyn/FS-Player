@@ -121,7 +121,8 @@
         if ([file isPlayable]) {
             VDLPlaybackViewController *controller = [[VDLPlaybackViewController alloc] initWithNibName:@"VDLPlaybackViewController" bundle:nil];
             controller.delegate = self;
-            [self.navigationController presentViewController:controller animated:YES completion:nil];
+            [self presentViewController:controller animated:YES completion:nil];
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];            
             [controller playMediaFromURL:file.URL];
         }
     }
@@ -144,6 +145,7 @@
 
 - (void)playbackControllerDidFinishPlayback:(VDLPlaybackViewController *)playbackController
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [playbackController dismissViewControllerAnimated:YES completion:nil];
 }
 

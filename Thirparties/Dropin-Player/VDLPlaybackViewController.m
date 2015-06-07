@@ -50,7 +50,6 @@
 
     /* fix-up UI */
     self.wantsFullScreenLayout = YES;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     /* we want to influence the system volume */
     [[AVAudioSession sharedInstance] setDelegate:self];

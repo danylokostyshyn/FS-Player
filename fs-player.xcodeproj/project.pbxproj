@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		51F76A5F137A482A8B125510 /* libPods-fs-player.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */; };
+		77489CE91B245B4A00421640 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE41B245B4A00421640 /* TFHpple.m */; };
+		77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE61B245B4A00421640 /* TFHppleElement.m */; };
+		77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE81B245B4A00421640 /* XPathQuery.m */; };
+		77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77489CEE1B245B6B00421640 /* libxml2.dylib */; };
 		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
 		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
 		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
@@ -36,6 +40,14 @@
 
 /* Begin PBXFileReference section */
 		5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.release.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.release.xcconfig"; sourceTree = "<group>"; };
+		77489CE31B245B4A00421640 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHpple.h; path = Thirparties/hpple/TFHpple.h; sourceTree = "<group>"; };
+		77489CE41B245B4A00421640 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHpple.m; path = Thirparties/hpple/TFHpple.m; sourceTree = "<group>"; };
+		77489CE51B245B4A00421640 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHppleElement.h; path = Thirparties/hpple/TFHppleElement.h; sourceTree = "<group>"; };
+		77489CE61B245B4A00421640 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHppleElement.m; path = Thirparties/hpple/TFHppleElement.m; sourceTree = "<group>"; };
+		77489CE71B245B4A00421640 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XPathQuery.h; path = Thirparties/hpple/XPathQuery.h; sourceTree = "<group>"; };
+		77489CE81B245B4A00421640 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = Thirparties/hpple/XPathQuery.m; sourceTree = "<group>"; };
+		77489CEE1B245B6B00421640 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		77489CF01B245B7A00421640 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		7F979ECE194ED72800327233 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED0194ED78C00327233 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
@@ -92,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */,
 				7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */,
 				7FCACF0918D839ED009F439A /* CoreGraphics.framework in Frameworks */,
 				7FCACF0B18D839ED009F439A /* UIKit.framework in Frameworks */,
@@ -103,6 +116,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77489CEC1B245B4E00421640 /* Hpple */ = {
+			isa = PBXGroup;
+			children = (
+				77489CE31B245B4A00421640 /* TFHpple.h */,
+				77489CE41B245B4A00421640 /* TFHpple.m */,
+				77489CE51B245B4A00421640 /* TFHppleElement.h */,
+				77489CE61B245B4A00421640 /* TFHppleElement.m */,
+				77489CE71B245B4A00421640 /* XPathQuery.h */,
+				77489CE81B245B4A00421640 /* XPathQuery.m */,
+			);
+			name = Hpple;
+			sourceTree = "<group>";
+		};
+		77489CED1B245B5400421640 /* Thirdparties */ = {
+			isa = PBXGroup;
+			children = (
+				77489CEC1B245B4E00421640 /* Hpple */,
+				7F979F23194F0BD000327233 /* Dropin-Player */,
+			);
+			name = Thirdparties;
+			sourceTree = "<group>";
+		};
 		7EE662C5F2B24FF2199FB409 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +161,7 @@
 		7FCACEFA18D839ED009F439A = {
 			isa = PBXGroup;
 			children = (
-				7F979F23194F0BD000327233 /* Dropin-Player */,
+				77489CED1B245B5400421640 /* Thirdparties */,
 				7FCACF0C18D839ED009F439A /* fs-player */,
 				7FCACF0518D839ED009F439A /* Frameworks */,
 				7FCACF0418D839ED009F439A /* Products */,
@@ -145,6 +180,8 @@
 		7FCACF0518D839ED009F439A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77489CF01B245B7A00421640 /* libxml2.2.dylib */,
+				77489CEE1B245B6B00421640 /* libxml2.dylib */,
 				7F979ED6194EDAD500327233 /* libstdc++.6.dylib */,
 				7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */,
 				7F979ED0194ED78C00327233 /* libstdc++.dylib */,
@@ -347,11 +384,14 @@
 				7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */,
 				7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */,
 				7FCACF1318D839ED009F439A /* main.m in Sources */,
+				77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */,
 				7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */,
 				7F979F36194F915500327233 /* FSProgressButton.m in Sources */,
 				7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */,
 				7FCACF5118D86053009F439A /* FSFile.m in Sources */,
 				7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */,
+				77489CE91B245B4A00421640 /* TFHpple.m in Sources */,
+				77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */,
 				7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */,
 				7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */,
 				7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */,
@@ -452,6 +492,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/MobileVLCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					$SDKROOT/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -468,6 +516,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/MobileVLCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					$SDKROOT/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

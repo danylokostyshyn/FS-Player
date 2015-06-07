@@ -4,7 +4,6 @@
 target "fs-player" do
 pod 'AFNetworking'
 pod 'SVProgressHUD'
-pod 'hpple', :head
 pod 'MobileVLCKit'
 end
 

@@ -20,20 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.5.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - hpple (0.2.0)
   - MobileVLCKit (2.2.1)
   - SVProgressHUD (1.1.3)
 
 DEPENDENCIES:
   - AFNetworking
-  - hpple
   - MobileVLCKit
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
-  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
   MobileVLCKit: bb3359b2221316554129beb0c45827803a2de9be
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.1

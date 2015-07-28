@@ -104,6 +104,7 @@
     [super viewWillAppear:animated];
 
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 
     /* setup the media player instance, give it a delegate and something to draw into */
     _mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--avi-index=2", @"--play-and-pause"]];
@@ -152,13 +153,8 @@
     }
 
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-}
-
-- (UIResponder *)nextResponder
-{
-    [self _resetIdleTimer];
-    return [super nextResponder];
 }
 
 - (IBAction)positionSliderAction:(UISlider *)sender

@@ -65,6 +65,8 @@
 {
     [super viewDidLoad];
 
+    self.definesPresentationContext = YES;
+    
     self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
     self.navigationItem.titleView = self.searchController.searchBar;
     

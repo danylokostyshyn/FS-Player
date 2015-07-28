@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.files count];;
+    return [self.files count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,8 +121,8 @@
         if ([file isPlayable]) {
             VDLPlaybackViewController *controller = [[VDLPlaybackViewController alloc] initWithNibName:@"VDLPlaybackViewController" bundle:nil];
             controller.delegate = self;
-            [self presentViewController:controller animated:YES completion:nil];
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];            
+
+            [self.navigationController presentViewController:controller animated:YES completion:nil];
             [controller playMediaFromURL:file.URL];
         }
     }
@@ -145,8 +145,7 @@
 
 - (void)playbackControllerDidFinishPlayback:(VDLPlaybackViewController *)playbackController
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-    [playbackController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -68,8 +68,8 @@
     self.definesPresentationContext = YES;
     
     self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
-    self.navigationItem.titleView = self.searchController.searchBar;
-    
+    [self configureSearchBar];
+
     if ([FSSettings isLoggedIn]) {
         [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
             self.favorites = items;
@@ -78,6 +78,27 @@
             
         }];
     }
+}
+
+- (void)configureSearchBar
+{
+    UISearchBar *searchBar = self.searchController.searchBar;
+    searchBar.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UIView *searchBarContainer = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.bounds];
+    [searchBarContainer addSubview:searchBar];
+
+    NSDictionary *views = @{@"searchBar" : searchBar};
+    [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchBar]-0-|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+
+    [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[searchBar]-0-|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+    self.navigationItem.titleView = searchBarContainer;
 }
 
 - (void)didReceiveMemoryWarning
@@ -204,15 +225,17 @@
 
 #pragma mark - UISearchBarDelegate
 
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-//{
-//    self.searchResults = nil;
-//}
-//
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    [self performSearch:searchBar.text];
-//}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    self.searchResults = nil;
+ }
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchText.length == 0) {
+        self.searchResults = nil;
+    }
+}
 
 #pragma mark - UIAlertViewDelegate
 

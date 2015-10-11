@@ -12,6 +12,7 @@
 		77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE61B245B4A00421640 /* TFHppleElement.m */; };
 		77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE81B245B4A00421640 /* XPathQuery.m */; };
 		77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77489CEE1B245B6B00421640 /* libxml2.dylib */; };
+		77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
 		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
 		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
@@ -48,6 +49,7 @@
 		77489CE81B245B4A00421640 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = Thirparties/hpple/XPathQuery.m; sourceTree = "<group>"; };
 		77489CEE1B245B6B00421640 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		77489CF01B245B7A00421640 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		7F979ECE194ED72800327233 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED0194ED78C00327233 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
@@ -258,6 +260,7 @@
 		7FCACF4318D83FD1009F439A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */,
 				7F979F1E194EE23200327233 /* Main.storyboard */,
 				7FCACF1818D839ED009F439A /* Images.xcassets */,
 			);
@@ -289,6 +292,7 @@
 				7FCACF0018D839ED009F439A /* Frameworks */,
 				7FCACF0118D839ED009F439A /* Resources */,
 				216CB4FB42EE4CB987A0181C /* Copy Pods Resources */,
+				FF91EBE808B82BCB7B38DD45 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -306,7 +310,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FS;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = kostyshyn;
 			};
 			buildConfigurationList = 7FCACEFE18D839ED009F439A /* Build configuration list for PBXProject "fs-player" */;
@@ -334,6 +338,7 @@
 				7FCACF1118D839ED009F439A /* InfoPlist.strings in Resources */,
 				7F979F1F194EE23200327233 /* Main.storyboard in Resources */,
 				7F979F28194F0BD000327233 /* VDLPlaybackViewController.xib in Resources */,
+				77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */,
 				7FCACF1918D839ED009F439A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +374,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FF91EBE808B82BCB7B38DD45 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fs-player/Pods-fs-player-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -432,6 +452,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -470,6 +492,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -502,6 +525,7 @@
 				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kostyshyn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -526,6 +550,7 @@
 				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kostyshyn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

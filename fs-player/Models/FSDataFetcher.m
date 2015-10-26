@@ -39,8 +39,15 @@
         NSArray *elements = [doc searchWithXPathQuery:@"//div[@class='b-search-page__results']/a"];
         for (TFHppleElement *element in elements) {
             FSCatalog *catalog = [[FSCatalog alloc] init];
-            NSString *pathComponent =  [[element attributes] objectForKey:@"href"];
-            catalog.URL = [[NSURL alloc] initWithScheme:@"http" host:@"brb.to" path:pathComponent];
+            NSString *path =  [[element attributes] objectForKey:@"href"];
+
+            NSString *identifier = [[path componentsSeparatedByString:@"/"] lastObject];
+            identifier = [[identifier componentsSeparatedByString:@"-"] firstObject];
+            catalog.identifier = identifier;
+            
+            path = [FS_API_ENDPOINT stringByAppendingPathComponent:path];
+            catalog.URL = [NSURL URLWithString:path];
+
             catalog.name = [[[element searchWithXPathQuery:@"//@title"] lastObject] text];
             NSString *imgSrc = [[[element searchWithXPathQuery:@"//img/@src"] lastObject] text];
             catalog.thumbnailURL = [NSURL URLWithString:imgSrc];
@@ -215,6 +222,11 @@
                         catalog.name = [[[aTag searchWithXPathQuery:@"//b/span"] lastObject] text];
                         
                         NSString *path = [[aTag attributes] objectForKey:@"href"];
+                        
+                        NSString *identifier = [[path componentsSeparatedByString:@"/"] lastObject];
+                        identifier = [[identifier componentsSeparatedByString:@"-"] firstObject];
+                        catalog.identifier = identifier;
+                        
                         path = [FS_API_ENDPOINT stringByAppendingPathComponent:path];
                         catalog.URL = [NSURL URLWithString:path];
 

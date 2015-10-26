@@ -12,6 +12,7 @@
 
 @interface FSCatalog : NSObject <FSDescriptionProtocol>
 @property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSURL *thumbnailURL;
 @property (nonatomic, strong) NSString *category;

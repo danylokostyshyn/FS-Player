@@ -11,6 +11,7 @@
 //models
 #import "FSDataFetcher.h"
 #import "FSDescriptionProtocol.h"
+#import "FSCatalog.h"
 
 //views
 #import "FSSearchResultsTableViewCell.h"
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) UIBarButtonItem *loginBarButtonItem;
 @property (nonatomic, strong) NSArray *searchResults;
 @property (nonatomic, strong) NSArray *favorites;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @end
 
 @implementation FSSearchViewController
@@ -59,23 +61,46 @@
     return _searchController;
 }
 
+- (UILongPressGestureRecognizer *)longPressGestureRecognizer
+{
+    if (!_longPressGestureRecognizer) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    }
+    return _longPressGestureRecognizer;
+}
+
 #pragma mark - View Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.definesPresentationContext = YES;
-    
     self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+    
+    self.definesPresentationContext = YES;
     [self configureSearchBar];
 
+    [self.tableView addGestureRecognizer:self.longPressGestureRecognizer];
+
+    [self reloadFavorites];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Methods
+
+- (void)reloadFavorites
+{
     if ([FSSettings isLoggedIn]) {
         [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
             self.favorites = items;
             [self.tableView reloadData];
         } failure:^(NSError *error) {
-            
+            NSLog(@"%s: %@", __FUNCTION__, error);
         }];
     }
 }
@@ -87,27 +112,19 @@
     
     UIView *searchBarContainer = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.bounds];
     [searchBarContainer addSubview:searchBar];
-
+    
     NSDictionary *views = @{@"searchBar" : searchBar};
     [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchBar]-0-|"
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:views]];
-
+    
     [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[searchBar]-0-|"
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:views]];
     self.navigationItem.titleView = searchBarContainer;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Private Methods
 
 - (void)performSearch
 {
@@ -117,7 +134,7 @@
             self.searchResults = items;
             [self.tableView reloadData];
         } failure:^(NSError *error) {
-            
+            NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
         }];
     }
 }
@@ -191,7 +208,7 @@
         [self performSegueWithIdentifier:@"filesSegue"
                                   sender:@{@"selectedItem":selectedItem, @"files":files}];
     } failure:^(NSError *error) {
-        
+        NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
     }];
 }
 
@@ -256,16 +273,73 @@
                 self.loginBarButtonItem = nil;
                 self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
                 
-                [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
-                    self.favorites = items;
-                    [self.tableView reloadData];
-                } failure:^(NSError *error) {
-                    
-                }];
-
+                [self reloadFavorites];
             } failure:^(NSError *error) {
-                
+                NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
             }];
+        }
+    }
+}
+
+#pragma mark - 
+
+- (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        id <FSDescriptionProtocol> item = nil;
+        if (self.searchController.active) {
+            item = [self.searchResults objectAtIndex:indexPath.row];
+        } else {
+            item = [self.favorites objectAtIndex:indexPath.row];
+        }
+
+        if ([item isKindOfClass:[FSCatalog class]]) {
+            FSCatalog *catalog = (FSCatalog *)item;
+            if (catalog.identifier.length == 0) {
+                return;
+            }
+            
+            void (^reloadFavoritesBlock)() = ^void() { [self reloadFavorites]; };
+
+            void (^addToFavoritesHandler)(UIAlertAction * _Nonnull) = ^void(UIAlertAction * _Nonnull action) {
+                [FSDataFetcher addToFavoritesItemWithIdentifier:catalog.identifier
+                                                        success:reloadFavoritesBlock
+                                                        failure:nil];
+            };
+            
+            void (^removeFromFavoritesHandler)(UIAlertAction * _Nonnull) = ^void(UIAlertAction * _Nonnull action) {
+                [FSDataFetcher removeFromFavoritesItemWithIdentifier:catalog.identifier
+                                                             success:reloadFavoritesBlock
+                                                             failure:nil];
+            };
+
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[catalog text]
+                                                                                     message:nil
+                                                                              preferredStyle:UIAlertControllerStyleActionSheet];
+            // Create add or remove action
+            UIAlertAction *mainAction = nil;
+            if ([catalog isFavorite]) {
+                mainAction = [UIAlertAction actionWithTitle:@"Remove favorite"
+                                                      style:UIAlertActionStyleDestructive
+                                                    handler:addToFavoritesHandler];
+
+            } else {
+                mainAction = [UIAlertAction actionWithTitle:@"Add to favorite"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:removeFromFavoritesHandler];
+            }
+            [alertController addAction:mainAction];
+
+            // Add cancel action
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:nil];
+            [alertController addAction:cancelAction];
+            
+            [self.navigationController presentViewController:alertController animated:YES completion:nil];
         }
     }
 }

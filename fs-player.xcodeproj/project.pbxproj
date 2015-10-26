@@ -12,7 +12,7 @@
 		77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE61B245B4A00421640 /* TFHppleElement.m */; };
 		77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE81B245B4A00421640 /* XPathQuery.m */; };
 		77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77489CEE1B245B6B00421640 /* libxml2.dylib */; };
-		77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */; };
 		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
 		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
 		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
@@ -468,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -501,7 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

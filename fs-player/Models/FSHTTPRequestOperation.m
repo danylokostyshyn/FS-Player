@@ -22,13 +22,15 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
     if (self.showProgressHUD) {
-        if (self.statusMessage) {
-            [SVProgressHUD showWithStatus:self.statusMessage
-                                 maskType:SVProgressHUDMaskTypeBlack];
-        } else {
-            [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading", nil)
-                                 maskType:SVProgressHUDMaskTypeBlack];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.statusMessage) {
+                [SVProgressHUD showWithStatus:self.statusMessage
+                                     maskType:SVProgressHUDMaskTypeBlack];
+            } else {
+                [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading", nil)
+                                     maskType:SVProgressHUDMaskTypeBlack];
+            }
+        });
     }
     return [super connection:connection willSendRequest:request redirectResponse:response];
 }
@@ -37,7 +39,9 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
     if (self.showProgressHUD) {
-        [SVProgressHUD dismiss];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
     }
     [super connectionDidFinishLoading:connection];
 }
@@ -46,7 +50,9 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
     if (self.showProgressHUD) {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"No Internet Connection", nil)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"No Internet Connection", nil)];
+        });
     }
     [super connection:connection didFailWithError:error];
 }

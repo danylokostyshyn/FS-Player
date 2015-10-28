@@ -361,6 +361,12 @@
                                                                  handler:nil];
             [alertController addAction:cancelAction];
             
+            if (alertController.popoverPresentationController) {
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                alertController.popoverPresentationController.sourceView = cell;
+                alertController.popoverPresentationController.sourceRect = [cell convertRect:cell.frame fromView:self.tableView];
+            }
+            
             [self.navigationController presentViewController:alertController animated:YES completion:nil];
         }
     }

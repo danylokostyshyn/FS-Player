@@ -14,12 +14,9 @@
 - (void)fileTableViewCellDidPressDownloadButton:(FSFileTableViewCell *)cell;
 @end
 
-@protocol FSProgressDelegate <NSObject>
-- (void)progressDidChange:(CGFloat)progress;
-@end
-
-@interface FSFileTableViewCell : UITableViewCell <FSProgressDelegate>
+@interface FSFileTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) id <FSFileTableViewCellDelegate> delegate;
+@property (nonatomic) double progress;
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 kostyshyn. All rights reserved.
 //
 
-#import "FSViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface FSDownloadedFilesViewController : FSViewController
+@interface FSDownloadedFilesViewController : UIViewController
 
 @end

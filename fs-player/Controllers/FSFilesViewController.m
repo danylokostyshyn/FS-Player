@@ -8,11 +8,6 @@
 
 #import "FSFilesViewController.h"
 
-//models
-#import "FSDataFetcher.h"
-#import "FSFile.h"
-#import "FSFolder.h"
-
 //views
 #import "FSFileTableViewCell.h"
 
@@ -55,24 +50,24 @@
 {
     id item = [self.files objectAtIndex:indexPath.row];
 
-    if ([item isKindOfClass:[FSFolder class]]) {
+    if ([item isKindOfClass:[Folder class]]) {
 
         static NSString *subtitleCellIdentifier = @"subtitleTableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subtitleCellIdentifier];
         
-        id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
+        id <Descriptable> item = [self.files objectAtIndex:indexPath.row];
         cell.textLabel.text = [item text];
         cell.detailTextLabel.text = [item detailText];
         cell.imageView.image = [item image];
         
         return cell;
 
-    } else if ([item isKindOfClass:[FSFile class]]) {
+    } else if ([item isKindOfClass:[File class]]) {
     
         static NSString *fileCellIdentifier = @"subtitleTableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fileCellIdentifier];
         
-        id <FSDescriptionProtocol> item = [self.files objectAtIndex:indexPath.row];
+        id <Descriptable> item = [self.files objectAtIndex:indexPath.row];
         cell.textLabel.text = [item text];
         cell.detailTextLabel.text = [item detailText];
         
@@ -89,22 +84,19 @@
 {
     id item = [self.files objectAtIndex:indexPath.row];
 
-    if ([item isKindOfClass:[FSFolder class]]) {
-
-        FSFolder *folder = (FSFolder *)item;
-        [FSDataFetcher filesFromURL:folder.URL folder:folder.identifier showProgressHUD:YES success:^(NSArray *files) {
-            
+    if ([item isKindOfClass:[Folder class]]) {
+        Folder *folder = (Folder *)item;
+        [DataFetcher filesFromURL:folder.URL folder:folder.identifier showProgressHUD:YES success:^(NSArray * _Nonnull files) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             FSFilesViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"filesViewController"];
             controller.title = folder.name;
             controller.files = files;
 
             [self.navigationController pushViewController:controller animated:YES];
-
-        } failure:^(NSError *error) {
-            
+        } failure:^(NSError * _Nonnull error) {
+            NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
         }];
-    } else if ([item isKindOfClass:[FSFile class]]) {
+    } else if ([item isKindOfClass:[File class]]) {
         [self fileTableViewCellDidPressPlayButton:(FSFileTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]];
     }
 }
@@ -115,9 +107,9 @@
 {
     NSUInteger index = [self.tableView indexPathForCell:cell].row;
     id item = [self.files objectAtIndex:index];
-    
-    if ([item isKindOfClass:[FSFile class]]) {
-        FSFile *file = (FSFile *)item;
+
+    if ([item isKindOfClass:[File class]]) {
+        File *file = (File *)item;
         if ([file isPlayable]) {
             VDLPlaybackViewController *controller = [[VDLPlaybackViewController alloc] initWithNibName:@"VDLPlaybackViewController" bundle:nil];
             controller.delegate = self;
@@ -133,10 +125,12 @@
     NSUInteger index = [self.tableView indexPathForCell:cell].row;
     id item = [self.files objectAtIndex:index];
     
-    if ([item isKindOfClass:[FSFile class]]) {
-        FSFile *file = (FSFile *)item;
+    if ([item isKindOfClass:[File class]]) {
+        File *file = (File *)item;
         if ([file isPlayable]) {
-            [FSDataFetcher downloadFileFromURL:file.URL success:nil failure:nil progressDelegate:cell];
+            [DataFetcher downloadFileFromURL:file.URL success:nil failure:nil progress:^(double progress) {
+                cell.progress = progress;
+            }];
         }
     }
 }

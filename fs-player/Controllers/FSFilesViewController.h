@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 kostyshyn. All rights reserved.
 //
 
-#import "FSViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface FSFilesViewController : FSViewController
+@interface FSFilesViewController : UIViewController
 @property (nonatomic, strong) NSArray *files;
 @end

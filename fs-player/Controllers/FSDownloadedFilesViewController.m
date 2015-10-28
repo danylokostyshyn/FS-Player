@@ -8,8 +8,6 @@
 
 #import "FSDownloadedFilesViewController.h"
 
-#import "FSSettings.h"
-
 // controllers
 #import "VDLPlaybackViewController.h"
 
@@ -32,7 +30,7 @@
 - (NSArray *)files
 {
     if (!_files) {
-        NSString *downloadsDirectory = [FSSettings downloadsDirectory];
+        NSString *downloadsDirectory = [Settings downloadsDirectory];
         NSURL *downloadsDirectoryURL = [NSURL fileURLWithPath:downloadsDirectory isDirectory:YES];
 
         NSError *error;
@@ -85,7 +83,7 @@
     
     NSURL *fileURL = [self.files objectAtIndex:indexPath.row];
     cell.textLabel.text = [[fileURL pathComponents] lastObject];
-    cell.detailTextLabel.text = [FSSettings fileDescriptionAtPath:[fileURL path]];
+    cell.detailTextLabel.text = [Settings fileDescriptionAtPath:[fileURL path]];
     
     return cell;
 }

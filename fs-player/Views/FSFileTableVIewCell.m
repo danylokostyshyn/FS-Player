@@ -27,6 +27,12 @@
     return self;
 }
 
+- (void)setProgress:(double)progress
+{
+    _progress = progress;
+    self.downloadButton.progress = _progress;
+}
+
 - (void)awakeFromNib
 {
     [self configure];
@@ -54,13 +60,6 @@
 - (IBAction)downloadButtonPressed:(id)sender
 {
     [self.delegate fileTableViewCellDidPressDownloadButton:self];
-}
-
-#pragma mark - FSProgressDelegate
-
-- (void)progressDidChange:(CGFloat)progress
-{
-    self.downloadButton.progress = progress;
 }
 
 @end

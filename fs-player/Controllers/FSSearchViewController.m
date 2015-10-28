@@ -8,11 +8,6 @@
 
 #import "FSSearchViewController.h"
 
-//models
-#import "FSDataFetcher.h"
-#import "FSDescriptionProtocol.h"
-#import "FSCatalog.h"
-
 //views
 #import "FSSearchResultsTableViewCell.h"
 
@@ -35,7 +30,7 @@
 {
     if (!_loginBarButtonItem) {
         NSString *buttonTitle = nil;
-        if ([FSSettings isLoggedIn]) {
+        if ([Settings isLoggedIn]) {
             buttonTitle = @"Logout";
         } else {
             buttonTitle = @"Login";
@@ -95,11 +90,11 @@
 
 - (void)reloadFavorites
 {
-    if ([FSSettings isLoggedIn]) {
-        [FSDataFetcher favoritesWithSuccess:^(NSArray *items) {
+    if ([Settings isLoggedIn]) {
+        [DataFetcher favoritesWithSuccess:^(NSArray<Catalog *> * _Nonnull items) {
             self.favorites = items;
             [self.tableView reloadData];
-        } failure:^(NSError *error) {
+        } failure:^(NSError * _Nonnull error) {
             NSLog(@"%s: %@", __FUNCTION__, error);
         }];
     }
@@ -130,18 +125,19 @@
 {
     NSString *pattern = self.searchController.searchBar.text;
     if ([pattern length] > 0) {
-        [FSDataFetcher searchForText:pattern showProgressHUD:YES success:^(NSArray *items) {
+        
+        [DataFetcher searchForText:pattern showProgressHUD:YES success:^(NSArray<Catalog *> * _Nonnull items) {
             self.searchResults = items;
             [self.tableView reloadData];
-        } failure:^(NSError *error) {
-            NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
+        } failure:^(NSError * _Nonnull error) {
+            NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);            
         }];
     }
 }
 
 - (void)loginBarButtonPressed:(id)sender
 {
-    if ([FSSettings isLoggedIn]) {
+    if ([Settings isLoggedIn]) {
         UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Log out from fs.ua ?"
                                                                  message:nil
                                                                 delegate:self
@@ -174,7 +170,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id <FSDescriptionProtocol> item = nil;
+    id <Descriptable> item = nil;
 
     if (self.searchController.active) {
         item = [self.searchResults objectAtIndex:indexPath.row];
@@ -196,18 +192,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id <FSDescriptionProtocol> selectedItem;
+    id <Descriptable> selectedItem;
 
     if (self.searchController.active) {
         selectedItem = [self.searchResults objectAtIndex:indexPath.row];
     } else if (tableView == self.tableView) {
         selectedItem = [self.favorites objectAtIndex:indexPath.row];
     } else return;
-    
-    [FSDataFetcher filesFromURL:[selectedItem URL] folder:0 showProgressHUD:YES success:^(NSArray *files) {
+
+    [DataFetcher filesFromURL:[selectedItem URL] folder:nil showProgressHUD:YES success:^(NSArray * _Nonnull files) {
         [self performSegueWithIdentifier:@"filesSegue"
                                   sender:@{@"selectedItem":selectedItem, @"files":files}];
-    } failure:^(NSError *error) {
+    } failure:^(NSError * _Nonnull error) {
         NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
     }];
 }
@@ -218,7 +214,7 @@
 {
     if ([segue.identifier isEqualToString:@"filesSegue"]) {
 
-        id <FSDescriptionProtocol> selectedItem = [sender objectForKey:@"selectedItem"];
+        id <Descriptable> selectedItem = [sender objectForKey:@"selectedItem"];
         NSArray *files = [sender objectForKey:@"files"];
         
         FSFilesViewController *controller = segue.destinationViewController;
@@ -259,22 +255,22 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        if ([FSSettings isLoggedIn]) {
+        if ([Settings isLoggedIn]) {
             self.favorites = nil;
             [self.tableView reloadData];
-            [FSSettings deleteAllCookies];
+            [Settings deleteAllCookies];
             self.loginBarButtonItem = nil;
             self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
         } else {
             NSString *username = ((UITextField *)[alertView textFieldAtIndex:0]).text;
             NSString *password = ((UITextField *)[alertView textFieldAtIndex:1]).text;
 
-            [FSDataFetcher loginUsingUsername:username password:password success:^{
+            [DataFetcher loginUsingUsername:username password:password success:^{
                 self.loginBarButtonItem = nil;
                 self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
                 
                 [self reloadFavorites];
-            } failure:^(NSError *error) {
+            } failure:^(NSError * _Nonnull error) {
                 NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
             }];
         }
@@ -289,15 +285,15 @@
         CGPoint point = [gestureRecognizer locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
         
-        id <FSDescriptionProtocol> item = nil;
+        id <Descriptable> item = nil;
         if (self.searchController.active) {
             item = [self.searchResults objectAtIndex:indexPath.row];
         } else {
             item = [self.favorites objectAtIndex:indexPath.row];
         }
 
-        if ([item isKindOfClass:[FSCatalog class]]) {
-            FSCatalog *catalog = (FSCatalog *)item;
+        if ([item isKindOfClass:[Catalog class]]) {
+            Catalog *catalog = (Catalog *)item;
             if (catalog.identifier.length == 0) {
                 return;
             }
@@ -305,15 +301,11 @@
             void (^reloadFavoritesBlock)() = ^void() { [self reloadFavorites]; };
 
             void (^addToFavoritesHandler)(UIAlertAction * _Nonnull) = ^void(UIAlertAction * _Nonnull action) {
-                [FSDataFetcher addToFavoritesItemWithIdentifier:catalog.identifier
-                                                        success:reloadFavoritesBlock
-                                                        failure:nil];
+                [DataFetcher addToFavoritesWithIdentifier:catalog.identifier success:reloadFavoritesBlock failure:nil];
             };
             
             void (^removeFromFavoritesHandler)(UIAlertAction * _Nonnull) = ^void(UIAlertAction * _Nonnull action) {
-                [FSDataFetcher removeFromFavoritesItemWithIdentifier:catalog.identifier
-                                                             success:reloadFavoritesBlock
-                                                             failure:nil];
+                [DataFetcher removeFromFavoritesWithIdentifier:catalog.identifier success:reloadFavoritesBlock failure:nil];
             };
 
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[catalog text]
@@ -324,12 +316,12 @@
             if ([catalog isFavorite]) {
                 mainAction = [UIAlertAction actionWithTitle:@"Remove favorite"
                                                       style:UIAlertActionStyleDestructive
-                                                    handler:addToFavoritesHandler];
+                                                    handler:removeFromFavoritesHandler];
 
             } else {
                 mainAction = [UIAlertAction actionWithTitle:@"Add to favorite"
                                                       style:UIAlertActionStyleDefault
-                                                    handler:removeFromFavoritesHandler];
+                                                    handler:addToFavoritesHandler];
             }
             [alertController addAction:mainAction];
 

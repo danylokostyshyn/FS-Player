@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		51F76A5F137A482A8B125510 /* libPods-fs-player.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */; };
-		77489CE91B245B4A00421640 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE41B245B4A00421640 /* TFHpple.m */; };
-		77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE61B245B4A00421640 /* TFHppleElement.m */; };
-		77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 77489CE81B245B4A00421640 /* XPathQuery.m */; };
 		77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77489CEE1B245B6B00421640 /* libxml2.dylib */; };
 		77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */; };
+		77E25E111BDF8A7700D0527F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E101BDF8A7700D0527F /* AppDelegate.swift */; };
+		77E25E131BDF8FB700D0527F /* Descriptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E121BDF8FB700D0527F /* Descriptable.swift */; };
+		77E25E151BDF92A200D0527F /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E141BDF92A200D0527F /* Catalog.swift */; };
+		77E25E191BDF969C00D0527F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E181BDF969C00D0527F /* File.swift */; };
+		77E25E1A1BDFAB6B00D0527F /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E161BDF968C00D0527F /* Folder.swift */; };
+		77E25E1C1BDFB45600D0527F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E1B1BDFB45600D0527F /* Settings.swift */; };
+		77E25E201BDFC59D00D0527F /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E1F1BDFC59D00D0527F /* DataFetcher.swift */; };
 		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
 		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
 		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
@@ -24,32 +28,25 @@
 		7FCACF0918D839ED009F439A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0818D839ED009F439A /* CoreGraphics.framework */; };
 		7FCACF0B18D839ED009F439A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0A18D839ED009F439A /* UIKit.framework */; };
 		7FCACF1118D839ED009F439A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF0F18D839ED009F439A /* InfoPlist.strings */; };
-		7FCACF1318D839ED009F439A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF1218D839ED009F439A /* main.m */; };
 		7FCACF1918D839ED009F439A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF1818D839ED009F439A /* Images.xcassets */; };
-		7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3718D83B29009F439A /* FSDataFetcher.m */; };
-		7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3A18D83F54009F439A /* FSViewController.m */; };
 		7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */; };
 		7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */; };
 		7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4B18D85E73009F439A /* FSFilesViewController.m */; };
-		7FCACF5118D86053009F439A /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5018D86053009F439A /* FSFile.m */; };
-		7FCACF5418D86063009F439A /* FSFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5318D86063009F439A /* FSFolder.m */; };
-		7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */; };
-		7FCACF5F18D8F0B6009F439A /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */; };
-		7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6818D9C113009F439A /* FSCatalog.m */; };
-		7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF6B18DAE4A4009F439A /* FSSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.release.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.release.xcconfig"; sourceTree = "<group>"; };
-		77489CE31B245B4A00421640 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHpple.h; path = Thirparties/hpple/TFHpple.h; sourceTree = "<group>"; };
-		77489CE41B245B4A00421640 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHpple.m; path = Thirparties/hpple/TFHpple.m; sourceTree = "<group>"; };
-		77489CE51B245B4A00421640 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHppleElement.h; path = Thirparties/hpple/TFHppleElement.h; sourceTree = "<group>"; };
-		77489CE61B245B4A00421640 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHppleElement.m; path = Thirparties/hpple/TFHppleElement.m; sourceTree = "<group>"; };
-		77489CE71B245B4A00421640 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XPathQuery.h; path = Thirparties/hpple/XPathQuery.h; sourceTree = "<group>"; };
-		77489CE81B245B4A00421640 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = Thirparties/hpple/XPathQuery.m; sourceTree = "<group>"; };
 		77489CEE1B245B6B00421640 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		77489CF01B245B7A00421640 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		77E25E0F1BDF8A7700D0527F /* fs-player-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fs-player-Bridging-Header.h"; sourceTree = "<group>"; };
+		77E25E101BDF8A7700D0527F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Models/AppDelegate.swift; sourceTree = "<group>"; };
+		77E25E121BDF8FB700D0527F /* Descriptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Descriptable.swift; path = Models/Descriptable.swift; sourceTree = "<group>"; };
+		77E25E141BDF92A200D0527F /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Catalog.swift; path = Models/Catalog.swift; sourceTree = "<group>"; };
+		77E25E161BDF968C00D0527F /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Folder.swift; path = Models/Folder.swift; sourceTree = "<group>"; };
+		77E25E181BDF969C00D0527F /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Models/File.swift; sourceTree = "<group>"; };
+		77E25E1B1BDFB45600D0527F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Models/Settings.swift; sourceTree = "<group>"; };
+		77E25E1F1BDFC59D00D0527F /* DataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataFetcher.swift; path = Models/DataFetcher.swift; sourceTree = "<group>"; };
 		7F979ECE194ED72800327233 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED0194ED78C00327233 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
@@ -70,33 +67,15 @@
 		7FCACF0A18D839ED009F439A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7FCACF0E18D839ED009F439A /* fs-player-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fs-player-Info.plist"; sourceTree = "<group>"; };
 		7FCACF1018D839ED009F439A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7FCACF1218D839ED009F439A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7FCACF1418D839ED009F439A /* fs-player-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fs-player-Prefix.pch"; sourceTree = "<group>"; };
 		7FCACF1818D839ED009F439A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7FCACF1F18D839ED009F439A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7FCACF3618D83B29009F439A /* FSDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSDataFetcher.h; path = Models/FSDataFetcher.h; sourceTree = "<group>"; };
-		7FCACF3718D83B29009F439A /* FSDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSDataFetcher.m; path = Models/FSDataFetcher.m; sourceTree = "<group>"; };
-		7FCACF3918D83F54009F439A /* FSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSViewController.h; path = Controllers/FSViewController.h; sourceTree = "<group>"; };
-		7FCACF3A18D83F54009F439A /* FSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSViewController.m; path = Controllers/FSViewController.m; sourceTree = "<group>"; };
 		7FCACF3D18D83F7F009F439A /* FSSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchViewController.h; path = Controllers/FSSearchViewController.h; sourceTree = "<group>"; };
 		7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchViewController.m; path = Controllers/FSSearchViewController.m; sourceTree = "<group>"; };
 		7FCACF4618D854F1009F439A /* FSSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchResultsTableViewCell.h; path = Views/FSSearchResultsTableViewCell.h; sourceTree = "<group>"; };
 		7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchResultsTableViewCell.m; path = Views/FSSearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		7FCACF4A18D85E73009F439A /* FSFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFilesViewController.h; path = Controllers/FSFilesViewController.h; sourceTree = "<group>"; };
 		7FCACF4B18D85E73009F439A /* FSFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFilesViewController.m; path = Controllers/FSFilesViewController.m; sourceTree = "<group>"; };
-		7FCACF4F18D86053009F439A /* FSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFile.h; path = Models/FSFile.h; sourceTree = "<group>"; };
-		7FCACF5018D86053009F439A /* FSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFile.m; path = Models/FSFile.m; sourceTree = "<group>"; };
-		7FCACF5218D86063009F439A /* FSFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFolder.h; path = Models/FSFolder.h; sourceTree = "<group>"; };
-		7FCACF5318D86063009F439A /* FSFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFolder.m; path = Models/FSFolder.m; sourceTree = "<group>"; };
-		7FCACF5518D87751009F439A /* FSDescriptionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FSDescriptionProtocol.h; path = Models/FSDescriptionProtocol.h; sourceTree = "<group>"; };
-		7FCACF5618D89A36009F439A /* FSHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSHTTPRequestOperation.h; path = Models/FSHTTPRequestOperation.h; sourceTree = "<group>"; };
-		7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSHTTPRequestOperation.m; path = Models/FSHTTPRequestOperation.m; sourceTree = "<group>"; };
-		7FCACF5D18D8F0B6009F439A /* FSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAppDelegate.h; path = Models/FSAppDelegate.h; sourceTree = "<group>"; };
-		7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAppDelegate.m; path = Models/FSAppDelegate.m; sourceTree = "<group>"; };
-		7FCACF6718D9C113009F439A /* FSCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCatalog.h; path = Models/FSCatalog.h; sourceTree = "<group>"; };
-		7FCACF6818D9C113009F439A /* FSCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCatalog.m; path = Models/FSCatalog.m; sourceTree = "<group>"; };
-		7FCACF6A18DAE4A4009F439A /* FSSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSettings.h; path = Models/FSSettings.h; sourceTree = "<group>"; };
-		7FCACF6B18DAE4A4009F439A /* FSSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSettings.m; path = Models/FSSettings.m; sourceTree = "<group>"; };
 		8F4461FAE5DB66E2E11E220B /* Pods-fs-player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.debug.xcconfig"; sourceTree = "<group>"; };
 		AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fs-player.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -118,23 +97,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		77489CEC1B245B4E00421640 /* Hpple */ = {
-			isa = PBXGroup;
-			children = (
-				77489CE31B245B4A00421640 /* TFHpple.h */,
-				77489CE41B245B4A00421640 /* TFHpple.m */,
-				77489CE51B245B4A00421640 /* TFHppleElement.h */,
-				77489CE61B245B4A00421640 /* TFHppleElement.m */,
-				77489CE71B245B4A00421640 /* XPathQuery.h */,
-				77489CE81B245B4A00421640 /* XPathQuery.m */,
-			);
-			name = Hpple;
-			sourceTree = "<group>";
-		};
 		77489CED1B245B5400421640 /* Thirdparties */ = {
 			isa = PBXGroup;
 			children = (
-				77489CEC1B245B4E00421640 /* Hpple */,
 				7F979F23194F0BD000327233 /* Dropin-Player */,
 			);
 			name = Thirdparties;
@@ -200,11 +165,13 @@
 		7FCACF0C18D839ED009F439A /* fs-player */ = {
 			isa = PBXGroup;
 			children = (
+				77E25E101BDF8A7700D0527F /* AppDelegate.swift */,
 				7FCACF3518D83B05009F439A /* Models */,
 				7FCACF4918D854F4009F439A /* Views */,
 				7FCACF3C18D83F58009F439A /* Controllers */,
 				7FCACF4318D83FD1009F439A /* Resources */,
 				7FCACF0D18D839ED009F439A /* Supporting Files */,
+				77E25E0F1BDF8A7700D0527F /* fs-player-Bridging-Header.h */,
 			);
 			path = "fs-player";
 			sourceTree = "<group>";
@@ -214,7 +181,6 @@
 			children = (
 				7FCACF0E18D839ED009F439A /* fs-player-Info.plist */,
 				7FCACF0F18D839ED009F439A /* InfoPlist.strings */,
-				7FCACF1218D839ED009F439A /* main.m */,
 				7FCACF1418D839ED009F439A /* fs-player-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -223,21 +189,12 @@
 		7FCACF3518D83B05009F439A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7FCACF5D18D8F0B6009F439A /* FSAppDelegate.h */,
-				7FCACF5E18D8F0B6009F439A /* FSAppDelegate.m */,
-				7FCACF5618D89A36009F439A /* FSHTTPRequestOperation.h */,
-				7FCACF5718D89A36009F439A /* FSHTTPRequestOperation.m */,
-				7FCACF3618D83B29009F439A /* FSDataFetcher.h */,
-				7FCACF3718D83B29009F439A /* FSDataFetcher.m */,
-				7FCACF6A18DAE4A4009F439A /* FSSettings.h */,
-				7FCACF6B18DAE4A4009F439A /* FSSettings.m */,
-				7FCACF5518D87751009F439A /* FSDescriptionProtocol.h */,
-				7FCACF6718D9C113009F439A /* FSCatalog.h */,
-				7FCACF6818D9C113009F439A /* FSCatalog.m */,
-				7FCACF5218D86063009F439A /* FSFolder.h */,
-				7FCACF5318D86063009F439A /* FSFolder.m */,
-				7FCACF4F18D86053009F439A /* FSFile.h */,
-				7FCACF5018D86053009F439A /* FSFile.m */,
+				77E25E1F1BDFC59D00D0527F /* DataFetcher.swift */,
+				77E25E1B1BDFB45600D0527F /* Settings.swift */,
+				77E25E121BDF8FB700D0527F /* Descriptable.swift */,
+				77E25E141BDF92A200D0527F /* Catalog.swift */,
+				77E25E161BDF968C00D0527F /* Folder.swift */,
+				77E25E181BDF969C00D0527F /* File.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -245,8 +202,6 @@
 		7FCACF3C18D83F58009F439A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FCACF3918D83F54009F439A /* FSViewController.h */,
-				7FCACF3A18D83F54009F439A /* FSViewController.m */,
 				7FCACF3D18D83F7F009F439A /* FSSearchViewController.h */,
 				7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */,
 				7FCACF4A18D85E73009F439A /* FSFilesViewController.h */,
@@ -310,6 +265,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FS;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = kostyshyn;
 			};
@@ -399,24 +355,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F979F27194F0BD000327233 /* VDLPlaybackViewController.m in Sources */,
-				7FCACF6C18DAE4A4009F439A /* FSSettings.m in Sources */,
-				7FCACF5818D89A36009F439A /* FSHTTPRequestOperation.m in Sources */,
 				7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */,
 				7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */,
-				7FCACF1318D839ED009F439A /* main.m in Sources */,
-				77489CEA1B245B4A00421640 /* TFHppleElement.m in Sources */,
-				7FCACF3B18D83F54009F439A /* FSViewController.m in Sources */,
+				77E25E111BDF8A7700D0527F /* AppDelegate.swift in Sources */,
 				7F979F36194F915500327233 /* FSProgressButton.m in Sources */,
+				77E25E201BDFC59D00D0527F /* DataFetcher.swift in Sources */,
 				7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */,
-				7FCACF5118D86053009F439A /* FSFile.m in Sources */,
-				7FCACF3818D83B29009F439A /* FSDataFetcher.m in Sources */,
-				77489CE91B245B4A00421640 /* TFHpple.m in Sources */,
-				77489CEB1B245B4A00421640 /* XPathQuery.m in Sources */,
-				7FCACF6918D9C113009F439A /* FSCatalog.m in Sources */,
+				77E25E151BDF92A200D0527F /* Catalog.swift in Sources */,
+				77E25E1C1BDFB45600D0527F /* Settings.swift in Sources */,
+				77E25E191BDF969C00D0527F /* File.swift in Sources */,
+				77E25E131BDF8FB700D0527F /* Descriptable.swift in Sources */,
 				7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */,
 				7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */,
-				7FCACF5418D86063009F439A /* FSFolder.m in Sources */,
-				7FCACF5F18D8F0B6009F439A /* FSAppDelegate.m in Sources */,
+				77E25E1A1BDFAB6B00D0527F /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -525,8 +477,11 @@
 				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kostyshyn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "fs-player/fs-player-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -538,6 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -550,8 +506,10 @@
 				);
 				INFOPLIST_FILE = "fs-player/fs-player-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kostyshyn.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "fs-player/fs-player-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

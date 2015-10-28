@@ -14,7 +14,7 @@
 //controller
 #import "FSFilesViewController.h"
 
-@interface FSSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, UIAlertViewDelegate>
+@interface FSSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSTimer *searchTimer;
@@ -88,12 +88,18 @@
 
 #pragma mark - Private Methods
 
+- (void)reloadTableView
+{
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (void)reloadFavorites
 {
     if ([Settings isLoggedIn]) {
         [DataFetcher favoritesWithSuccess:^(NSArray<Catalog *> * _Nonnull items) {
             self.favorites = items;
-            [self.tableView reloadData];
+            [self reloadTableView];
         } failure:^(NSError * _Nonnull error) {
             NSLog(@"%s: %@", __FUNCTION__, error);
         }];
@@ -128,33 +134,84 @@
         
         [DataFetcher searchForText:pattern showProgressHUD:YES success:^(NSArray<Catalog *> * _Nonnull items) {
             self.searchResults = items;
-            [self.tableView reloadData];
+            [self reloadTableView];
         } failure:^(NSError * _Nonnull error) {
             NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);            
         }];
     }
 }
 
-- (void)loginBarButtonPressed:(id)sender
+- (void)performLoginWithUsername:(NSString *)username password:(NSString *)password
 {
-    if ([Settings isLoggedIn]) {
-        UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Log out from fs.ua ?"
-                                                                 message:nil
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Cancel"
-                                                       otherButtonTitles:@"Log out", nil];
-        [loginAlertView show];
-    } else {
-        UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Log in to fs.ua"
-                                                                 message:nil
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Cancel"
-                                                       otherButtonTitles:@"Log in", nil];
-        loginAlertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-        [loginAlertView show];
-    }
+    [DataFetcher loginUsingUsername:username password:password success:^{
+        self.loginBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+        
+        [self reloadFavorites];
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
+    }];
 }
 
+- (void)performLogout
+{
+    [Settings deleteAllCookies];
+    
+    self.favorites = nil;
+    [self reloadTableView];
+    
+    self.loginBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
+}
+
+
+- (void)loginBarButtonPressed:(id)sender
+{
+    UIAlertController *alertController = nil;
+    if ([Settings isLoggedIn]) {
+        alertController = [UIAlertController alertControllerWithTitle:@"Log out from fs.ua ?"
+                                                              message:nil
+                                                       preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                            style:UIAlertActionStyleCancel handler:nil]];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Log out"
+                                                            style:UIAlertActionStyleDefault
+          handler:^(UIAlertAction * _Nonnull action) {
+              [self performLogout];
+          }]];
+    } else {
+        alertController = [UIAlertController alertControllerWithTitle:@"Log in to fs.ua"
+                                                              message:nil
+                                                       preferredStyle:UIAlertControllerStyleAlert];
+        
+        __block UITextField *loginTextField = nil;
+        __block UITextField *paswordTextField = nil;
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"Login";
+            loginTextField = textField;
+        }];
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"Password";
+            textField.secureTextEntry = YES;
+            paswordTextField = textField;
+        }];
+                
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                            style:UIAlertActionStyleCancel handler:nil]];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Log in"
+                                                            style:UIAlertActionStyleDefault
+          handler:^(UIAlertAction * _Nonnull action) {
+              [self performLoginWithUsername:loginTextField.text
+                                    password:paswordTextField.text];
+          }]];
+    }
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -247,33 +304,6 @@
 {
     if (searchText.length == 0) {
         self.searchResults = nil;
-    }
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        if ([Settings isLoggedIn]) {
-            self.favorites = nil;
-            [self.tableView reloadData];
-            [Settings deleteAllCookies];
-            self.loginBarButtonItem = nil;
-            self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
-        } else {
-            NSString *username = ((UITextField *)[alertView textFieldAtIndex:0]).text;
-            NSString *password = ((UITextField *)[alertView textFieldAtIndex:1]).text;
-
-            [DataFetcher loginUsingUsername:username password:password success:^{
-                self.loginBarButtonItem = nil;
-                self.navigationItem.leftBarButtonItem = self.loginBarButtonItem;
-                
-                [self reloadFavorites];
-            } failure:^(NSError * _Nonnull error) {
-                NSLog(@"%s: %@", __FUNCTION__, error.localizedDescription);
-            }];
-        }
     }
 }
 

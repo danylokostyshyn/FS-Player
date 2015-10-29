@@ -108,7 +108,7 @@ let APIEndPoint = "http://fs.to"
         NSOperationQueue.mainQueue().addOperation(operation)
     }
     
-    class func files(fromURL URL: NSURL, folder: String?, showProgressHUD: Bool = true, success: (([AnyObject]) -> ())?, failure: ((NSError) -> ())? ) {
+    class func files(fromURL URL: NSURL, folder: String?, showProgressHUD: Bool = true, success: (([Descriptable]) -> ())?, failure: ((NSError) -> ())? ) {
         let folderIdentifier = folder ?? "0"
         let parameters = "?ajax&folder=\(folderIdentifier)"
         let path = URL.absoluteString.stringByAppendingString(parameters)
@@ -118,7 +118,7 @@ let APIEndPoint = "http://fs.to"
         operation.showProgressHUD = true
         operation.responseSerializer = AFHTTPResponseSerializer()
         operation.setCompletionBlockWithSuccess({ (operation, responseObject) -> Void in
-            var items = [AnyObject]()
+            var items = [Descriptable]()
             defer {
                 if success != nil { success!(items) }
             }

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		51F76A5F137A482A8B125510 /* libPods-fs-player.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */; };
+		771906DB1BE219DA001EF77C /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771906DA1BE219DA001EF77C /* SearchResultsTableViewCell.swift */; };
+		771906DD1BE219F2001EF77C /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771906DC1BE219F2001EF77C /* FileTableViewCell.swift */; };
+		771906DF1BE21A13001EF77C /* ProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771906DE1BE21A13001EF77C /* ProgressButton.swift */; };
+		771906E11BE231F8001EF77C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771906E01BE231F8001EF77C /* SearchViewController.swift */; };
+		771906E31BE259FF001EF77C /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771906E21BE259FF001EF77C /* FilesViewController.swift */; };
 		77489CEF1B245B6B00421640 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77489CEE1B245B6B00421640 /* libxml2.dylib */; };
 		77DC8BE21BCAC1540002A6C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */; };
 		77E25E111BDF8A7700D0527F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E101BDF8A7700D0527F /* AppDelegate.swift */; };
@@ -19,23 +24,22 @@
 		77E25E201BDFC59D00D0527F /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E1F1BDFC59D00D0527F /* DataFetcher.swift */; };
 		7F979ED8194EDAE300327233 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */; };
 		7F979F1F194EE23200327233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F1E194EE23200327233 /* Main.storyboard */; };
-		7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */; };
 		7F979F27194F0BD000327233 /* VDLPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F25194F0BD000327233 /* VDLPlaybackViewController.m */; };
 		7F979F28194F0BD000327233 /* VDLPlaybackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F979F26194F0BD000327233 /* VDLPlaybackViewController.xib */; };
-		7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F30194F599100327233 /* FSFileTableViewCell.m */; };
-		7F979F36194F915500327233 /* FSProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F979F35194F915500327233 /* FSProgressButton.m */; };
 		7FCACF0718D839ED009F439A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0618D839ED009F439A /* Foundation.framework */; };
 		7FCACF0918D839ED009F439A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0818D839ED009F439A /* CoreGraphics.framework */; };
 		7FCACF0B18D839ED009F439A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCACF0A18D839ED009F439A /* UIKit.framework */; };
 		7FCACF1118D839ED009F439A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF0F18D839ED009F439A /* InfoPlist.strings */; };
 		7FCACF1918D839ED009F439A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FCACF1818D839ED009F439A /* Images.xcassets */; };
-		7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */; };
-		7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */; };
-		7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FCACF4B18D85E73009F439A /* FSFilesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5C0186D5B0C189904F27AA10 /* Pods-fs-player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.release.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.release.xcconfig"; sourceTree = "<group>"; };
+		771906DA1BE219DA001EF77C /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultsTableViewCell.swift; path = Views/SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
+		771906DC1BE219F2001EF77C /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileTableViewCell.swift; path = Views/FileTableViewCell.swift; sourceTree = "<group>"; };
+		771906DE1BE21A13001EF77C /* ProgressButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressButton.swift; path = Views/ProgressButton.swift; sourceTree = "<group>"; };
+		771906E01BE231F8001EF77C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Controllers/SearchViewController.swift; sourceTree = "<group>"; };
+		771906E21BE259FF001EF77C /* FilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilesViewController.swift; path = Controllers/FilesViewController.swift; sourceTree = "<group>"; };
 		77489CEE1B245B6B00421640 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		77489CF01B245B7A00421640 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		77DC8BE11BCAC1540002A6C1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
@@ -52,30 +56,17 @@
 		7F979ED2194ED79100327233 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		7F979ED6194EDAD500327233 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		7F979F1E194EE23200327233 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Resources/Main.storyboard; sourceTree = "<group>"; };
-		7F979F20194EFACC00327233 /* FSDownloadedFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSDownloadedFilesViewController.h; path = Controllers/FSDownloadedFilesViewController.h; sourceTree = "<group>"; };
-		7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSDownloadedFilesViewController.m; path = Controllers/FSDownloadedFilesViewController.m; sourceTree = "<group>"; };
 		7F979F24194F0BD000327233 /* VDLPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDLPlaybackViewController.h; sourceTree = "<group>"; };
 		7F979F25194F0BD000327233 /* VDLPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDLPlaybackViewController.m; sourceTree = "<group>"; };
 		7F979F26194F0BD000327233 /* VDLPlaybackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VDLPlaybackViewController.xib; sourceTree = "<group>"; };
-		7F979F2F194F599100327233 /* FSFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFileTableViewCell.h; path = Views/FSFileTableViewCell.h; sourceTree = "<group>"; };
-		7F979F30194F599100327233 /* FSFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFileTableViewCell.m; path = Views/FSFileTableViewCell.m; sourceTree = "<group>"; };
-		7F979F34194F915500327233 /* FSProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSProgressButton.h; path = Views/FSProgressButton.h; sourceTree = "<group>"; };
-		7F979F35194F915500327233 /* FSProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSProgressButton.m; path = Views/FSProgressButton.m; sourceTree = "<group>"; };
 		7FCACF0318D839ED009F439A /* fs-player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fs-player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCACF0618D839ED009F439A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FCACF0818D839ED009F439A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7FCACF0A18D839ED009F439A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7FCACF0E18D839ED009F439A /* fs-player-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fs-player-Info.plist"; sourceTree = "<group>"; };
 		7FCACF1018D839ED009F439A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7FCACF1418D839ED009F439A /* fs-player-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fs-player-Prefix.pch"; sourceTree = "<group>"; };
 		7FCACF1818D839ED009F439A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7FCACF1F18D839ED009F439A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7FCACF3D18D83F7F009F439A /* FSSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchViewController.h; path = Controllers/FSSearchViewController.h; sourceTree = "<group>"; };
-		7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchViewController.m; path = Controllers/FSSearchViewController.m; sourceTree = "<group>"; };
-		7FCACF4618D854F1009F439A /* FSSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchResultsTableViewCell.h; path = Views/FSSearchResultsTableViewCell.h; sourceTree = "<group>"; };
-		7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchResultsTableViewCell.m; path = Views/FSSearchResultsTableViewCell.m; sourceTree = "<group>"; };
-		7FCACF4A18D85E73009F439A /* FSFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFilesViewController.h; path = Controllers/FSFilesViewController.h; sourceTree = "<group>"; };
-		7FCACF4B18D85E73009F439A /* FSFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFilesViewController.m; path = Controllers/FSFilesViewController.m; sourceTree = "<group>"; };
 		8F4461FAE5DB66E2E11E220B /* Pods-fs-player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fs-player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fs-player/Pods-fs-player.debug.xcconfig"; sourceTree = "<group>"; };
 		AC37040A803B4A618D9D5B23 /* libPods-fs-player.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fs-player.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,7 +172,6 @@
 			children = (
 				7FCACF0E18D839ED009F439A /* fs-player-Info.plist */,
 				7FCACF0F18D839ED009F439A /* InfoPlist.strings */,
-				7FCACF1418D839ED009F439A /* fs-player-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -202,12 +192,8 @@
 		7FCACF3C18D83F58009F439A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FCACF3D18D83F7F009F439A /* FSSearchViewController.h */,
-				7FCACF3E18D83F7F009F439A /* FSSearchViewController.m */,
-				7FCACF4A18D85E73009F439A /* FSFilesViewController.h */,
-				7FCACF4B18D85E73009F439A /* FSFilesViewController.m */,
-				7F979F20194EFACC00327233 /* FSDownloadedFilesViewController.h */,
-				7F979F21194EFACC00327233 /* FSDownloadedFilesViewController.m */,
+				771906E01BE231F8001EF77C /* SearchViewController.swift */,
+				771906E21BE259FF001EF77C /* FilesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -225,12 +211,9 @@
 		7FCACF4918D854F4009F439A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7FCACF4618D854F1009F439A /* FSSearchResultsTableViewCell.h */,
-				7FCACF4718D854F1009F439A /* FSSearchResultsTableViewCell.m */,
-				7F979F2F194F599100327233 /* FSFileTableViewCell.h */,
-				7F979F30194F599100327233 /* FSFileTableViewCell.m */,
-				7F979F34194F915500327233 /* FSProgressButton.h */,
-				7F979F35194F915500327233 /* FSProgressButton.m */,
+				771906DA1BE219DA001EF77C /* SearchResultsTableViewCell.swift */,
+				771906DC1BE219F2001EF77C /* FileTableViewCell.swift */,
+				771906DE1BE21A13001EF77C /* ProgressButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -354,20 +337,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				771906E11BE231F8001EF77C /* SearchViewController.swift in Sources */,
 				7F979F27194F0BD000327233 /* VDLPlaybackViewController.m in Sources */,
-				7F979F22194EFACC00327233 /* FSDownloadedFilesViewController.m in Sources */,
-				7FCACF4018D83F7F009F439A /* FSSearchViewController.m in Sources */,
 				77E25E111BDF8A7700D0527F /* AppDelegate.swift in Sources */,
-				7F979F36194F915500327233 /* FSProgressButton.m in Sources */,
+				771906DD1BE219F2001EF77C /* FileTableViewCell.swift in Sources */,
 				77E25E201BDFC59D00D0527F /* DataFetcher.swift in Sources */,
-				7F979F31194F599100327233 /* FSFileTableViewCell.m in Sources */,
 				77E25E151BDF92A200D0527F /* Catalog.swift in Sources */,
+				771906DF1BE21A13001EF77C /* ProgressButton.swift in Sources */,
 				77E25E1C1BDFB45600D0527F /* Settings.swift in Sources */,
 				77E25E191BDF969C00D0527F /* File.swift in Sources */,
 				77E25E131BDF8FB700D0527F /* Descriptable.swift in Sources */,
-				7FCACF4C18D85E73009F439A /* FSFilesViewController.m in Sources */,
-				7FCACF4818D854F1009F439A /* FSSearchResultsTableViewCell.m in Sources */,
 				77E25E1A1BDFAB6B00D0527F /* Folder.swift in Sources */,
+				771906E31BE259FF001EF77C /* FilesViewController.swift in Sources */,
+				771906DB1BE219DA001EF77C /* SearchResultsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +448,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -495,7 +476,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "fs-player/fs-player-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

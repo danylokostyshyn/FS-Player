@@ -156,7 +156,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         presentViewController(alertController, animated: true, completion: nil)
     }
 
-    // MARK - UITableViewDataSource
+    // MARK: - UITableViewDataSource
     
     private func itemAtIndexPath(indexPath: NSIndexPath) -> Descriptable {
         if searchController.active {

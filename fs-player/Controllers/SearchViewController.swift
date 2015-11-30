@@ -85,7 +85,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.titleView = searchBarContainer
     }
     
-    private func performSearch()  {
+    func performSearch()  {
         guard let pattern = searchController.searchBar.text else { return }
         if pattern.characters.count > 0 {
             DataFetcher.search(forText: pattern, success: { (items) -> () in
@@ -117,7 +117,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.leftBarButtonItem = loginBarButtonItem
     }
     
-    private func loginBarButtonPressed(sender: AnyObject) {
+    func loginBarButtonPressed(sender: AnyObject) {
 
         var alertController: UIAlertController!
         if Settings.isLoggedIn() {

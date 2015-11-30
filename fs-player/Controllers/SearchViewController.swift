@@ -245,7 +245,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
     // MARK: -
     
-    private func longPress(gestureRecognizer: UILongPressGestureRecognizer) {
+    func longPress(gestureRecognizer: UILongPressGestureRecognizer) {
         switch gestureRecognizer.state {
         case .Began:
             let point = gestureRecognizer.locationInView(tableView)
